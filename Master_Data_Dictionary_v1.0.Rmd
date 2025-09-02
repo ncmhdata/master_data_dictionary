@@ -1,30 +1,66 @@
 ---
-title: "Master_Data_Dictionary_v1.0"
+title: "NCMH Master Data Dictionary"
 author: "Daniel Oakes"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  rmdformats::readthedown:
+    code_folding: hide
+    df_print: paged
+    smart: false
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
+
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(kableExtra)
+library(rmdformats)
+library(downloadthis)
+
 ```
 
-## R Markdown
+## Alchemer Student Survey 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r, echo = FALSE}
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+alch_ss_2019 <- read.csv("../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv")
 
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
+Student survey data from 2019 and 2020. Including standardised scales PHQ-9, GADS-7, and WEMWBS-7. 
 
-You can also embed plots, for example:
+N Variables: `r nrow(alch_ss_2019)`
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r, echo = FALSE}
+
+# CSV File
+download_file(
+  path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv",
+  output_name = "Alchemer Student Survey 2019",
+  output_extension = ".csv",
+  button_label = "Download CSV File",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+# PDF File
+download_file(
+  path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.pdf",
+  output_name = "Alchemer Student Survey 2019",
+  output_extension = ".pdf",
+  button_label = "Download PDF File",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
