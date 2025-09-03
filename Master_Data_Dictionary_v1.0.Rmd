@@ -1,15 +1,16 @@
 ---
 title: "NCMH Master Data Dictionary"
 author: "Daniel Oakes"
-date: "`r Sys.Date()`"
+date: "Updated: `r Sys.Date()`"
 output: 
   rmdformats::readthedown:
     code_folding: hide
     df_print: paged
     smart: false
+    toc_depth: 3
 ---
 
-```{r setup, include = FALSE}
+```{r, include = FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -20,7 +21,60 @@ library(downloadthis)
 
 ```
 
-## Alchemer Student Survey 
+# OVERVIEW
+
+A summary of all surveys, assessments, and standardised (clinical) scales included in the NCMH data repository.
+
+## Surveys/ Assessments
+
+A list of all our NCMH surveys/ assessments.
+
+```{r, echo = FALSE} 
+
+survey_names <- read.csv("../Processed_Data/Master_Data_Dictionary_SurveyNames.csv")
+colnames(survey_names) <- c("Survey/ Assessment Name")
+kable(survey_names, booktabs = T, longtable = F) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
+  scroll_box(height = "500px")
+
+```
+
+## Standardised Scales 
+
+A list of all standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines the total number of times each standardised scale was used across all surveys/ assessments. 
+
+```{r, echo = FALSE}
+
+stan_scales <- as.data.frame(read.csv("../Processed_Data/Master_Data_Dictionary_ScalesTotal.csv"))
+stan_scales <- stan_scales %>% arrange(desc(Frequency))
+colnames(stan_scales) <- c("Scale Name", "Frequency")
+kable(stan_scales, booktabs = T, longtable = F) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
+  scroll_box(height = "500px")
+
+```
+
+## Standardised Scales by Survey/ Assessment
+
+A list of all standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines all of the standardised scales used in specific surveys/ assessments.  
+
+```{r, echo = FALSE}
+
+survey_scales <- as.data.frame(read.csv("../Processed_Data/Master_Data_Dictionary_ScalesBySurvey.csv"))
+colnames(survey_scales) <- c("Survey/ Assessment Name", "Scale Name")
+kable(survey_scales, booktabs = T, longtable = F) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
+  scroll_box(height = "500px")
+
+```
+
+---
+
+# STUDENT COHORT
+
+The NCMH student cohort is extensive, spanning over 5 years of active recruitment. Initially undertaken by NCMH directly in 2019 and 2020, then followed on in collaboration with the U-Flourish Nurture-U group from 2023 to present. 
+
+## Student Survey 2019
 
 ```{r, echo = FALSE}
 
@@ -28,18 +82,25 @@ alch_ss_2019 <- read.csv("../Individual_Surveys/Alchemer Student Survey 2019/Alc
 
 ```
 
-Student survey data from 2019 and 2020. Including standardised scales PHQ-9, GADS-7, and WEMWBS-7. 
+University student health and wellbeing survey data collected by NCMH.
 
-N Variables: `r nrow(alch_ss_2019)`
+**Total Variables**: `r nrow(alch_ss_2019)`
+<br>**Total Participants**: 1929
+<br>**Recruitment Dates**: Aug 2018 - Aug 2019
+<br>**Recruitment Method**: Online (Alchemer)
+<br>**Status**: Closed
+<br>**Principal Investigator**: Ian Jones
+<br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
+
 
 ```{r, echo = FALSE}
 
 # CSV File
 download_file(
   path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv",
-  output_name = "Alchemer Student Survey 2019",
+  output_name = "NCMH Student Survey 2019",
   output_extension = ".csv",
-  button_label = "Download CSV File",
+  button_label = "Download Data Dictionary (CSV)",
   button_type = "success",
   has_icon = TRUE,
   icon = "fa fa-save",
@@ -49,9 +110,9 @@ download_file(
 # PDF File
 download_file(
   path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.pdf",
-  output_name = "Alchemer Student Survey 2019",
+  output_name = "NCMH Student Survey 2019",
   output_extension = ".pdf",
-  button_label = "Download PDF File",
+  button_label = "Download Survey/ Assessment PDF",
   button_type = "success",
   has_icon = TRUE,
   icon = "fa fa-save",
@@ -59,6 +120,156 @@ download_file(
 )
 
 ```
+
+## Student Survey 2020
+
+```{r, echo = FALSE}
+
+alch_ss_2020 <- read.csv("../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv")
+
+```
+
+University student health and wellbeing survey data collected by NCMH.
+
+**Total Variables**: `r nrow(alch_ss_2020)`
+<br>**Total Participants**: 704
+<br>**Recruitment Dates**: Sep 2019 - Jan 2020
+<br>**Recruitment Method**: Online (Alchemer)
+<br>**Status**: Closed
+<br>**Principal Investigator**: Ian Jones
+<br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
+
+```{r, echo = FALSE}
+
+# CSV File
+download_file(
+  path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv",
+  output_name = "NCMH Student Survey 2020",
+  output_extension = ".csv",
+  button_label = "Download Data Dictionary (CSV)",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+# PDF File
+download_file(
+  path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.pdf",
+  output_name = "NCMH Student Survey 2020",
+  output_extension = ".pdf",
+  button_label = "Download Survey/ Assessment PDF",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+```
+
+# BRIEF ASSESSMENTS
+
+Initially starting in 2011, participants across the cohort have been recruited into a variation of the NCMH Brief Assessment ever since. These assessments act as a gateway into the NCMH cohort and have been utilised to screen participants for future research since inception. 
+
+## Brief Assessment WMHN
+
+The first iterations of the NCMH Brief Assessment developed when the NCMH was previously named the 'Welsh Mental Health Network (WMHN)'. This assessment was split into 4 variations, each of which utilised for different purposes.  
+
+### Brief Assessment WMHN - Participant Information
+
+```{r, echo = FALSE}
+
+brief_wmhn_psinfo <- read.csv("../Individual_Surveys/Brief Assessment WMHN - Participant Information/Brief Assessment WMHN - Participant Information.csv")
+
+```
+
+The Participant Information version of the assessment was utilised for most participants, assessing details about the participants demographics, medical history, medication, and substance use. 
+
+**Total Variables**: `r nrow(brief_wmhn_psinfo)`
+<br>**Total Participants**: 5338
+<br>**Recruitment Dates**: Jan 2011 - Dec 2017
+<br>**Recruitment Method**: Self-complete or Researcher (FORMIC)
+<br>**Status**: Closed
+<br>**Principal Investigator**: Ian Jones
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV File
+download_file(
+  path = "../Individual_Surveys/Brief Assessment WMHN - Participant Information/Brief Assessment WMHN - Participant Information.csv",
+  output_name = "NCMH Brief Assessment WMHN - Participant Information",
+  output_extension = ".csv",
+  button_label = "Download Data Dictionary (CSV)",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+# PDF File
+download_file(
+  path = "../Individual_Surveys/Brief Assessment WMHN - Participant Information/Brief Assessment WMHN - Participant Information.pdf",
+  output_name = "NCMH Brief Assessment WMHN - Participant Information",
+  output_extension = ".pdf",
+  button_label = "Download Survey/ Assessment PDF",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+```
+
+### Brief Assessment WMHN - Screening Form
+
+```{r, echo = FALSE}
+
+brief_wmhn_screen <- read.csv("../Individual_Surveys/Brief Assessment WMHN - Screening Form/Brief Assessment WMHN - Screening Form.csv")
+
+```
+
+The Screening Form version of the assessment was utilised for most participants, assessing details about the participants medication history, mental health status.  
+
+**Total Variables**: `r nrow(brief_wmhn_screen)`
+<br>**Total Participants**: 5761
+<br>**Recruitment Dates**: Aug 2011 - Oct 2019
+<br>**Recruitment Method**: Self-complete or Researcher (FORMIC)
+<br>**Status**: Closed
+<br>**Principal Investigator**: Ian Jones
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV File
+download_file(
+  path = "../Individual_Surveys/Brief Assessment WMHN - Screening Form/Brief Assessment WMHN - Screening Form.csv",
+  output_name = "NCMH Brief Assessment WMHN - Screening Form",
+  output_extension = ".csv",
+  button_label = "Download Data Dictionary (CSV)",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+# PDF File
+download_file(
+  path = "../Individual_Surveys/Brief Assessment WMHN - Screening Form/Brief Assessment WMHN - Screening Form.pdf",
+  output_name = "Brief Assessment WMHN - Screening Form",
+  output_extension = ".pdf",
+  button_label = "Download Survey/ Assessment PDF",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+
+```
+
+# OTHER SURVEYS ...
+
+
 
 
 
