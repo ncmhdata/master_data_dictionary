@@ -1,7 +1,7 @@
 ---
 title: "NCMH Master Data Dictionary"
 author: "Daniel Oakes"
-date: "Updated: `r Sys.Date()`"
+date: "Updated: `r format(Sys.Date(), '%d/%m/%Y')`"
 output: 
   rmdformats::readthedown:
     code_folding: hide
@@ -9,6 +9,8 @@ output:
     smart: false
     toc_depth: 3
 ---
+
+![](../Combined_Logos_Banner.png)
 
 ```{r, include = FALSE}
 
@@ -18,6 +20,7 @@ library(tidyverse)
 library(kableExtra)
 library(rmdformats)
 library(downloadthis)
+library(DT)
 
 ```
 
@@ -27,44 +30,205 @@ A summary of all surveys, assessments, and standardised (clinical) scales includ
 
 ## Surveys/ Assessments
 
-A list of all our NCMH surveys/ assessments.
-
 ```{r, echo = FALSE} 
 
 survey_names <- read.csv("../Processed_Data/Master_Data_Dictionary_SurveyNames.csv")
 colnames(survey_names) <- c("Survey/ Assessment Name")
-kable(survey_names, booktabs = T, longtable = F) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
-  scroll_box(height = "500px")
+
+```
+
+A list of all **`r nrow(survey_names)`** NCMH surveys/ assessments.
+
+```{r, echo = FALSE} 
+
+datatable(survey_names, 
+          rownames = FALSE,
+          class = "compact stripe hover",
+          options = list(searching = TRUE,
+                         searchHighlight = TRUE,
+                         search = list(regex = TRUE, 
+                                       caseInsensitive = TRUE),
+                         pageLength = 10,
+                         lengthMenu = c(10, 20, 50, 100),
+                         language = list(search = 'Search:'),
+                         initComplete = JS(
+                           "function(settings, json) {",
+                           "$(this.api().table().header()).css({'background-color':
+                           '#7B0D1E', 'color': '#fff'});",
+                           "$(this.api().table().container()).css({'font-size':
+                           '100%'});",
+                           "}")
+                         )) 
 
 ```
 
 ## Standardised Scales 
-
-A list of all standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines the total number of times each standardised scale was used across all surveys/ assessments. 
 
 ```{r, echo = FALSE}
 
 stan_scales <- as.data.frame(read.csv("../Processed_Data/Master_Data_Dictionary_ScalesTotal.csv"))
 stan_scales <- stan_scales %>% arrange(desc(Frequency))
 colnames(stan_scales) <- c("Scale Name", "Frequency")
-kable(stan_scales, booktabs = T, longtable = F) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
-  scroll_box(height = "500px")
+
+```
+
+A list of all **`r nrow(stan_scales)`** standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines the total number of times each standardised scale was used across all surveys/ assessments. 
+
+```{r, echo = FALSE}
+
+datatable(stan_scales, 
+          rownames = FALSE,
+          class = "compact stripe hover",
+          options = list(searching = TRUE,
+                         searchHighlight = TRUE,
+                         search = list(regex = TRUE, 
+                                       caseInsensitive = TRUE),
+                         pageLength = 10,
+                         lengthMenu = c(10, 20, 50, 100),
+                         language = list(search = 'Search:'),
+                         initComplete = JS(
+                           "function(settings, json) {",
+                           "$(this.api().table().header()).css({'background-color':
+                           '#7B0D1E', 'color': '#fff'});",
+                           "$(this.api().table().container()).css({'font-size':
+                           '100%'});",
+                           "}")
+                         )) 
 
 ```
 
 ## Standardised Scales by Survey/ Assessment
 
-A list of all standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines all of the standardised scales used in specific surveys/ assessments.  
-
 ```{r, echo = FALSE}
 
 survey_scales <- as.data.frame(read.csv("../Processed_Data/Master_Data_Dictionary_ScalesBySurvey.csv"))
 colnames(survey_scales) <- c("Survey/ Assessment Name", "Scale Name")
-kable(survey_scales, booktabs = T, longtable = F) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
-  scroll_box(height = "500px")
+
+```
+
+A list of all standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines all of the standardised scales used in specific surveys/ assessments, **`r nrow(survey_scales)`** in total.
+
+```{r, echo = FALSE}
+
+datatable(survey_scales, 
+          rownames = FALSE,
+          class = "compact stripe hover",
+          options = list(searching = TRUE,
+                         searchHighlight = TRUE,
+                         search = list(regex = TRUE, 
+                                       caseInsensitive = TRUE),
+                         pageLength = 10,
+                         lengthMenu = c(10, 20, 50, 100),
+                         language = list(search = 'Search:'),
+                         initComplete = JS(
+                           "function(settings, json) {",
+                           "$(this.api().table().header()).css({'background-color':
+                           '#7B0D1E', 'color': '#fff'});",
+                           "$(this.api().table().container()).css({'font-size':
+                           '100%'});",
+                           "}")
+                         )) 
+
+```
+
+## Complete Variable List (Variable Search)
+
+```{r, echo = FALSE, warning = FALSE, error = FALSE}
+
+dd_complete <- read.csv("../Processed_Data/Master_Data_Dictionary_Complete.csv")
+
+# REMOVE NON-UTF8 CHARACTERS
+dd_complete <- as.data.frame(lapply(dd_complete, iconv, to = "UTF-8"))
+
+# MODIFY VARIABLES
+dd_complete$index <- 1:nrow(dd_complete)
+dd_complete$original_variable_name <- NULL
+
+```
+
+This table includes a total of **`r nrow(dd_complete)` variables**, derived from all NCMH surveys/ assessments. 
+
+**n.b. only 1000 variables included currently. Full amount will be included in live version**
+
+Use the search bar on the table below to find specific variables or questions you may wish to use for your research. The *source* variable can be used to identify the survey/ assessment which specific variables or questions are derived from. 
+
+```{r, echo = FALSE, warning = FALSE, error = FALSE}
+
+datatable(head(dd_complete, 1000), 
+          rownames = FALSE,
+          class = "compact stripe hover nowrap",
+          options = list(searching = TRUE,
+                         searchHighlight = TRUE,
+                         search = list(regex = TRUE, 
+                                       caseInsensitive = TRUE),
+                         pageLength = 10,
+                         lengthMenu = c(10, 20, 50, 100),
+                         language = list(search = 'Search Variables:'),
+                         initComplete = JS(
+                           "function(settings, json) {",
+                           "$(this.api().table().header()).css({'background-color':
+                           '#7B0D1E', 'color': '#fff'});",
+                           "$(this.api().table().container()).css({'font-size':
+                           '100%'});",
+                           "}")
+                         )) 
+          ## REMOVE HEAD FUNCTION FOR FULL VERSION
+
+```
+
+---
+
+```{r, echo = FALSE, warning = FALSE, error = FALSE}
+
+# CREATE TABLE
+create_tab <- function(data) { 
+  
+  datatable(data, 
+            rownames = FALSE,
+            class = "compact stripe hover nowrap",
+            options = list(searching = TRUE,
+                           searchHighlight = TRUE,
+                           search = list(regex = TRUE, 
+                                         caseInsensitive = TRUE),
+                           pageLength = 10,
+                           lengthMenu = c(10, 20, 50, 100),
+                           language = list(search = 'Search Variables:'),
+                           initComplete = JS(
+                             "function(settings, json) {",
+                             "$(this.api().table().header()).css({'background-color':
+                             '#7B0D1E', 'color': '#fff'});",
+                             "$(this.api().table().container()).css({'font-size':
+                             '100%'});",
+                             "}")
+                           )
+            ) 
+}
+
+# CSV BUTTON
+csv_button <- function(file_path, name, ext){ 
+  download_file(path = file_path,
+  output_name = name, 
+  output_extension = ext,
+  button_label = "Download Data Dictionary (CSV)",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+  )
+}
+
+# PDF BUTTON
+pdf_button <- function(file_path, name, ext){ 
+  download_file(path = file_path,
+  output_name = name, 
+  output_extension = ext,
+  button_label = "Download Survey/ Assessment PDF",
+  button_type = "info",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+  )
+}
 
 ```
 
@@ -89,35 +253,29 @@ University student health and wellbeing survey data collected by NCMH.
 <br>**Recruitment Dates**: Aug 2018 - Aug 2019
 <br>**Recruitment Method**: Online (Alchemer)
 <br>**Status**: Closed
-<br>**Principal Investigator**: Ian Jones
+<br>**Principal Investigator**: Prof. Ian Jones
 <br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
 
 
 ```{r, echo = FALSE}
 
-# CSV File
-download_file(
-  path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv",
-  output_name = "NCMH Student Survey 2019",
-  output_extension = ".csv",
-  button_label = "Download Data Dictionary (CSV)",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv",
+  name = "NCMH Student Survey 2019",
+  ext = ".csv"
 )
 
-# PDF File
-download_file(
-  path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.pdf",
-  output_name = "NCMH Student Survey 2019",
-  output_extension = ".pdf",
-  button_label = "Download Survey/ Assessment PDF",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.pdf",
+  name = "NCMH Student Survey 2019",
+  ext = ".pdf"
 )
+
+# TABLE
+create_tab(data = alch_ss_2019)
+
 
 ```
 
@@ -136,34 +294,27 @@ University student health and wellbeing survey data collected by NCMH.
 <br>**Recruitment Dates**: Sep 2019 - Jan 2020
 <br>**Recruitment Method**: Online (Alchemer)
 <br>**Status**: Closed
-<br>**Principal Investigator**: Ian Jones
+<br>**Principal Investigator**: Prof. Ian Jones
 <br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
 
 ```{r, echo = FALSE}
 
-# CSV File
-download_file(
-  path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv",
-  output_name = "NCMH Student Survey 2020",
-  output_extension = ".csv",
-  button_label = "Download Data Dictionary (CSV)",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv",
+  name = "NCMH Student Survey 2020",
+  ext = ".csv"
 )
 
-# PDF File
-download_file(
-  path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.pdf",
-  output_name = "NCMH Student Survey 2020",
-  output_extension = ".pdf",
-  button_label = "Download Survey/ Assessment PDF",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.pdf",
+  name = "NCMH Student Survey 2020",
+  ext = ".pdf"
 )
+
+# TABLE
+create_tab(data = alch_ss_2020)
 
 ```
 
@@ -190,34 +341,27 @@ The Participant Information version of the assessment was utilised for most part
 <br>**Recruitment Dates**: Jan 2011 - Dec 2017
 <br>**Recruitment Method**: Self-complete or Researcher (FORMIC)
 <br>**Status**: Closed
-<br>**Principal Investigator**: Ian Jones
+<br>**Principal Investigator**: Prof. Ian Jones
 <br>**Standardised Scales Included**: None
 
 ```{r, echo = FALSE}
 
-# CSV File
-download_file(
-  path = "../Individual_Surveys/Brief Assessment WMHN - Participant Information/Brief Assessment WMHN - Participant Information.csv",
-  output_name = "NCMH Brief Assessment WMHN - Participant Information",
-  output_extension = ".csv",
-  button_label = "Download Data Dictionary (CSV)",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Participant Information/Brief Assessment WMHN - Participant Information.csv",
+  name = "NCMH Brief Assessment WMHN - Participant Information",
+  ext = ".csv"
 )
 
-# PDF File
-download_file(
-  path = "../Individual_Surveys/Brief Assessment WMHN - Participant Information/Brief Assessment WMHN - Participant Information.pdf",
-  output_name = "NCMH Brief Assessment WMHN - Participant Information",
-  output_extension = ".pdf",
-  button_label = "Download Survey/ Assessment PDF",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Participant Information/Brief Assessment WMHN - Participant Information.pdf",
+  name = "NCMH Brief Assessment WMHN - Participant Information",
+  ext = ".pdf"
 )
+
+# TABLE
+create_tab(data = brief_wmhn_psinfo)
 
 ```
 
@@ -236,38 +380,31 @@ The Screening Form version of the assessment was utilised for most participants,
 <br>**Recruitment Dates**: Aug 2011 - Oct 2019
 <br>**Recruitment Method**: Self-complete or Researcher (FORMIC)
 <br>**Status**: Closed
-<br>**Principal Investigator**: Ian Jones
+<br>**Principal Investigator**: Prof. Ian Jones
 <br>**Standardised Scales Included**: None
 
 ```{r, echo = FALSE}
 
-# CSV File
-download_file(
-  path = "../Individual_Surveys/Brief Assessment WMHN - Screening Form/Brief Assessment WMHN - Screening Form.csv",
-  output_name = "NCMH Brief Assessment WMHN - Screening Form",
-  output_extension = ".csv",
-  button_label = "Download Data Dictionary (CSV)",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Screening Form/Brief Assessment WMHN - Screening Form.csv",
+  name = "NCMH Brief Assessment WMHN - Screening Form",
+  ext = ".csv"
 )
 
-# PDF File
-download_file(
-  path = "../Individual_Surveys/Brief Assessment WMHN - Screening Form/Brief Assessment WMHN - Screening Form.pdf",
-  output_name = "Brief Assessment WMHN - Screening Form",
-  output_extension = ".pdf",
-  button_label = "Download Survey/ Assessment PDF",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Screening Form/Brief Assessment WMHN - Screening Form.pdf",
+  name = "NCMH Brief Assessment WMHN - Screening Form",
+  ext = ".pdf"
 )
+
+# TABLE
+create_tab(data = brief_wmhn_screen)
 
 ```
 
-# OTHER SURVEYS ...
+# OTHER SURVEYS ... 
 
 
 
