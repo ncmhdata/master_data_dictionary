@@ -1,6 +1,6 @@
 ---
 title: "NCMH Master Data Dictionary"
-author: "Daniel Oakes"
+author: "NCMH Data Team - ncmhdata@cardiff.ac.uk"
 date: "Updated: `r format(Sys.Date(), '%d/%m/%Y')`"
 output: 
   rmdformats::readthedown:
@@ -8,6 +8,9 @@ output:
     df_print: paged
     smart: false
     toc_depth: 3
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ![](../Combined_Logos_Banner.png)
@@ -26,20 +29,21 @@ library(DT)
 
 # OVERVIEW
 
-A summary of all surveys, assessments, and standardised (clinical) scales included in the NCMH data repository.
+A summary of all surveys, assessments, and standardised (clinical)
+scales included in the NCMH data repository.
 
 ## Surveys/ Assessments
 
-```{r, echo = FALSE} 
+```{r, echo = FALSE}
 
 survey_names <- read.csv("../Processed_Data/Master_Data_Dictionary_SurveyNames.csv")
-colnames(survey_names) <- c("Survey/ Assessment Name")
+colnames(survey_names) <- c("Survey/ Assessment Name", "Survey/ Assessment Grouping")
 
 ```
 
 A list of all **`r nrow(survey_names)`** NCMH surveys/ assessments.
 
-```{r, echo = FALSE} 
+```{r, echo = FALSE}
 
 datatable(survey_names, 
           rownames = FALSE,
@@ -53,7 +57,7 @@ datatable(survey_names,
                          language = list(search = 'Search:'),
                          initComplete = JS(
                            "function(settings, json) {",
-                           "$(this.api().table().header()).css({'background-color':
+                        "$(this.api().table().header()).css({'background-color':
                            '#7B0D1E', 'color': '#fff'});",
                            "$(this.api().table().container()).css({'font-size':
                            '100%'});",
@@ -62,7 +66,7 @@ datatable(survey_names,
 
 ```
 
-## Standardised Scales 
+## Standardised Scales
 
 ```{r, echo = FALSE}
 
@@ -72,7 +76,10 @@ colnames(stan_scales) <- c("Scale Name", "Frequency")
 
 ```
 
-A list of all **`r nrow(stan_scales)`** standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines the total number of times each standardised scale was used across all surveys/ assessments. 
+A list of all **`r nrow(stan_scales)`** standardised (clinical) scales
+used within our NCMH surveys/ assessments. The table below outlines the
+total number of times each standardised scale was used across all
+surveys/ assessments.
 
 ```{r, echo = FALSE}
 
@@ -88,7 +95,7 @@ datatable(stan_scales,
                          language = list(search = 'Search:'),
                          initComplete = JS(
                            "function(settings, json) {",
-                           "$(this.api().table().header()).css({'background-color':
+                        "$(this.api().table().header()).css({'background-color':
                            '#7B0D1E', 'color': '#fff'});",
                            "$(this.api().table().container()).css({'font-size':
                            '100%'});",
@@ -106,7 +113,10 @@ colnames(survey_scales) <- c("Survey/ Assessment Name", "Scale Name")
 
 ```
 
-A list of all standardised (clinical) scales used within our NCMH surveys/ assessments. The table below outlines all of the standardised scales used in specific surveys/ assessments, **`r nrow(survey_scales)`** in total.
+A list of all standardised (clinical) scales used within our NCMH
+surveys/ assessments. The table below outlines all of the standardised
+scales used in specific surveys/ assessments,
+**`r nrow(survey_scales)`** in total.
 
 ```{r, echo = FALSE}
 
@@ -122,7 +132,7 @@ datatable(survey_scales,
                          language = list(search = 'Search:'),
                          initComplete = JS(
                            "function(settings, json) {",
-                           "$(this.api().table().header()).css({'background-color':
+                        "$(this.api().table().header()).css({'background-color':
                            '#7B0D1E', 'color': '#fff'});",
                            "$(this.api().table().container()).css({'font-size':
                            '100%'});",
@@ -146,11 +156,16 @@ dd_complete$original_variable_name <- NULL
 
 ```
 
-This table includes a total of **`r nrow(dd_complete)` variables**, derived from all NCMH surveys/ assessments. 
+This table includes a total of **`r nrow(dd_complete)` variables**,
+derived from all NCMH surveys/ assessments.
 
-**n.b. only 1000 variables included currently. Full amount will be included in live version**
+**n.b. only 1000 variables included currently. Full amount will be
+included in live version**
 
-Use the search bar on the table below to find specific variables or questions you may wish to use for your research. The *source* variable can be used to identify the survey/ assessment which specific variables or questions are derived from. 
+Use the search bar on the table below to find specific variables or
+questions you may wish to use for your research. The *source* column can
+be used to identify the survey/ assessment which specific variables or
+questions are derived from.
 
 ```{r, echo = FALSE, warning = FALSE, error = FALSE}
 
@@ -166,7 +181,7 @@ datatable(head(dd_complete, 1000),
                          language = list(search = 'Search Variables:'),
                          initComplete = JS(
                            "function(settings, json) {",
-                           "$(this.api().table().header()).css({'background-color':
+                        "$(this.api().table().header()).css({'background-color':
                            '#7B0D1E', 'color': '#fff'});",
                            "$(this.api().table().container()).css({'font-size':
                            '100%'});",
@@ -176,7 +191,7 @@ datatable(head(dd_complete, 1000),
 
 ```
 
----
+------------------------------------------------------------------------
 
 ```{r, echo = FALSE, warning = FALSE, error = FALSE}
 
@@ -195,9 +210,9 @@ create_tab <- function(data) {
                            language = list(search = 'Search Variables:'),
                            initComplete = JS(
                              "function(settings, json) {",
-                             "$(this.api().table().header()).css({'background-color':
+                        "$(this.api().table().header()).css({'background-color':
                              '#7B0D1E', 'color': '#fff'});",
-                             "$(this.api().table().container()).css({'font-size':
+                            "$(this.api().table().container()).css({'font-size':
                              '100%'});",
                              "}")
                            )
@@ -232,99 +247,39 @@ pdf_button <- function(file_path, name, ext){
 
 ```
 
----
+------------------------------------------------------------------------
 
-# STUDENT COHORT
+# NCMH DATA APPLICATIONS
 
-The NCMH student cohort is extensive, spanning over 5 years of active recruitment. Initially undertaken by NCMH directly in 2019 and 2020, then followed on in collaboration with the U-Flourish Nurture-U group from 2023 to present. 
+Please use the following link to complete an application to use NCMH
+data or approach the cohort for wider research.
 
-## Student Survey 2019
+[INSERT REDCAP LINK]
 
-```{r, echo = FALSE}
+[INCLUDE A TEMPLATE FOR RESEARCHERS TO USE WHERE THEY CAN SUBMIT THE
+VARIABLES THAT THEY NEED FOR THEIR DATA APPLICATION. iF THIS CAN BE DONE
+AT THE FIRST INSTANCE - BEFORE THE APPLICATION IS SUBMITTED - IT WILL
+IMPROVE OUR EFFICIENCY WHEN PROCESSING THE APPLICATIONS AS WE MAY NOT
+NEED TO UNDERTAKE THE INITIAL MEETING WITH THEM ETC. ALLOW RESEARCHERS
+TO UPLOAD THIS TEMPLATE TO REDCAP SO ITS SENT ALONGSIDE THE DATA
+APPLICATION]
 
-alch_ss_2019 <- read.csv("../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv")
-
-```
-
-University student health and wellbeing survey data collected by NCMH.
-
-**Total Variables**: `r nrow(alch_ss_2019)`
-<br>**Total Participants**: 1929
-<br>**Recruitment Dates**: Aug 2018 - Aug 2019
-<br>**Recruitment Method**: Online (Alchemer)
-<br>**Status**: Closed
-<br>**Principal Investigator**: Prof. Ian Jones
-<br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
-
-
-```{r, echo = FALSE}
-
-# CSV FILE
-csv_button(
-  file_path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv",
-  name = "NCMH Student Survey 2019",
-  ext = ".csv"
-)
-
-# PDF FILE
-pdf_button(
-  file_path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.pdf",
-  name = "NCMH Student Survey 2019",
-  ext = ".pdf"
-)
-
-# TABLE
-create_tab(data = alch_ss_2019)
-
-
-```
-
-## Student Survey 2020
-
-```{r, echo = FALSE}
-
-alch_ss_2020 <- read.csv("../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv")
-
-```
-
-University student health and wellbeing survey data collected by NCMH.
-
-**Total Variables**: `r nrow(alch_ss_2020)`
-<br>**Total Participants**: 704
-<br>**Recruitment Dates**: Sep 2019 - Jan 2020
-<br>**Recruitment Method**: Online (Alchemer)
-<br>**Status**: Closed
-<br>**Principal Investigator**: Prof. Ian Jones
-<br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
-
-```{r, echo = FALSE}
-
-# CSV FILE
-csv_button(
-  file_path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv",
-  name = "NCMH Student Survey 2020",
-  ext = ".csv"
-)
-
-# PDF FILE
-pdf_button(
-  file_path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.pdf",
-  name = "NCMH Student Survey 2020",
-  ext = ".pdf"
-)
-
-# TABLE
-create_tab(data = alch_ss_2020)
-
-```
+------------------------------------------------------------------------
 
 # BRIEF ASSESSMENTS
 
-Initially starting in 2011, participants across the cohort have been recruited into a variation of the NCMH Brief Assessment ever since. These assessments act as a gateway into the NCMH cohort and have been utilised to screen participants for future research since inception. 
+Developed in 2011, participants across the cohort have been recruited
+into a variation of the **NCMH Brief Assessment** up until the present
+day. These assessments act as a gateway into the NCMH cohort and have
+been used to capture basic demographic and psychiatric history
+information.
 
 ## Brief Assessment WMHN
 
-The first iterations of the NCMH Brief Assessment developed when the NCMH was previously named the 'Welsh Mental Health Network (WMHN)'. This assessment was split into 4 variations, each of which utilised for different purposes.  
+The first iterations of the NCMH Brief Assessment developed when NCMH
+was previously named the 'Welsh Mental Health Network (WMHN)'. This
+assessment was split into 4 variations, each of which utilised for
+different purposes.
 
 ### Brief Assessment WMHN - Participant Information
 
@@ -334,13 +289,16 @@ brief_wmhn_psinfo <- read.csv("../Individual_Surveys/Brief Assessment WMHN - Par
 
 ```
 
-The Participant Information version of the assessment was utilised for most participants, assessing details about the participants demographics, medical history, medication, and substance use. 
+The Participant Information version of the assessment was administered
+to most participants, collecting details about the participants
+demographics, medical history, medication, and substance use.
 
-**Total Variables**: `r nrow(brief_wmhn_psinfo)`
-<br>**Total Participants**: 5338
-<br>**Recruitment Dates**: Jan 2011 - Dec 2017
-<br>**Recruitment Method**: Self-complete or Researcher (FORMIC)
-<br>**Status**: Closed
+**Total Variables**: `r nrow(brief_wmhn_psinfo %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 5338 
+<br>**Recruitment Dates**: Jan 2011 - Dec 2017 
+<br>**Recruitment Method**: Participant Self-completed or Researcher Administered 
+<br>**Data Collection Method**: FORMIC
+<br>**Status**: Closed 
 <br>**Principal Investigator**: Prof. Ian Jones
 <br>**Standardised Scales Included**: None
 
@@ -373,13 +331,16 @@ brief_wmhn_screen <- read.csv("../Individual_Surveys/Brief Assessment WMHN - Scr
 
 ```
 
-The Screening Form version of the assessment was utilised for most participants, assessing details about the participants medication history, mental health status.  
+The Screening Form version of the assessment was administered to most
+participants, assessing details about the participants medication
+history and mental health status.
 
-**Total Variables**: `r nrow(brief_wmhn_screen)`
-<br>**Total Participants**: 5761
-<br>**Recruitment Dates**: Aug 2011 - Oct 2019
-<br>**Recruitment Method**: Self-complete or Researcher (FORMIC)
-<br>**Status**: Closed
+**Total Variables**: `r nrow(brief_wmhn_screen %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 5761 
+<br>**Recruitment Dates**: Aug 2011 - Oct 2019 
+<br>**Recruitment Method**: Participant Self-completed or Researcher Administered 
+<br>**Data Collection Method**: FORMIC
+<br>**Status**: Closed 
 <br>**Principal Investigator**: Prof. Ian Jones
 <br>**Standardised Scales Included**: None
 
@@ -404,11 +365,3212 @@ create_tab(data = brief_wmhn_screen)
 
 ```
 
-# OTHER SURVEYS ... 
+### Brief Assessment WMHN - Parents
 
+```{r, echo = FALSE}
 
+brief_wmhn_parent <- read.csv("../Individual_Surveys/Brief Assessment WMHN - Parents/Brief Assessment WMHN - Parents.csv")
 
+```
 
+The Parent version of the assessment was administered to the parents of
+child participants, assessing details about the participants
+demographics, medical history, and medication, as well as family
+demographics.
 
+**Total Variables**: `r nrow(brief_wmhn_parent %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 273 
+<br>**Recruitment Dates**: Feb 2012 - Nov 2016 
+<br>**Recruitment Method**: Parent Self-completed or Researcher Administered <br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: None
 
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Parents/Brief Assessment WMHN - Parents.csv",
+  name = "NCMH Brief Assessment WMHN - Parents",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Parents/Brief Assessment WMHN - Parents.pdf",
+  name = "NCMH Brief Assessment WMHN - Parents",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_wmhn_parent)
+
+```
+
+### Brief Assessment WMHN - Carers and Relatives
+
+```{r, echo = FALSE}
+
+brief_wmhn_carerrel <- read.csv("../Individual_Surveys/Brief Assessment WMHN - Carers & Relatives/Brief Assessment WMHN - Carers & Relatives.csv")
+
+```
+
+The Carers and Relatives version of the assessment was administered to
+the carers and/ or relatives of participants who may have lacked
+capacity to complete the assessment alone. This assessed details about
+the participants demographics, medical history, medication, and
+substance use.
+
+**Total Variables**: `r nrow(brief_wmhn_carerrel %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 111 
+<br>**Recruitment Dates**: Mar 2012 - Aug 2016 
+<br>**Recruitment Method**: Carers and/ or Relatives Self-completed or Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Carers & Relatives/Brief Assessment WMHN - Carers & Relatives.csv",
+  name = "NCMH Brief Assessment WMHN - Carers and Relatives",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment WMHN - Carers & Relatives/Brief Assessment WMHN - Carers & Relatives.pdf",
+  name = "NCMH Brief Assessment WMHN - Carers and Relatives",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_wmhn_carerrel)
+
+```
+
+## Brief Assessment Screening
+
+The second iterations of the NCMH Brief Assessment, developed when NCMH
+became a standalone research organisation. This assessment was split
+into 2 variations, both very similar in content with slight variations
+in the alcohol use and drug consumption questions.
+
+### Brief Assessment Screening (v1)
+
+```{r, echo = FALSE}
+
+brief_screening_v1 <- read.csv("../Individual_Surveys/Brief Assessment Screening (v1)/Brief Assessment Screening (v1).csv")
+
+```
+
+The first version of the assessment was administered to a small number
+participants during this recruitment period. This collected details
+about the participants demographics, informant/ next of kin information,
+family demographics, children, psychiatric history, social factors,
+treatments, family psychiatric history, physical health, and substance
+use.
+
+**Total Variables**: `r nrow(brief_screening_v1 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 1188 
+<br>**Recruitment Dates**: Jul 2016 - Nov 2019 
+<br>**Recruitment Method**: Participant/ Parent/ Carer Self-completed or Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment Screening (v1)/Brief Assessment Screening (v1).csv",
+  name = "NCMH Brief Assessment Screening (v1)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment Screening (v2)/Brief Assessment Screening (v2).pdf",
+  name = "NCMH Brief Assessment Screening (v1)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_screening_v1)
+
+```
+
+### Brief Assessment Screening (v2)
+
+```{r, echo = FALSE}
+
+brief_screening_v2 <- read.csv("../Individual_Surveys/Brief Assessment Screening (v2)/Brief Assessment Screening (v2).csv")
+
+```
+
+The second version of the assessment was administered to a larger number
+participants during this recruitment period. This collected details
+about the participants demographics, informant/ next of kin information,
+family demographics, children, psychiatric history, social factors,
+treatments, family psychiatric history, physical health, and substance
+use.
+
+**Total Variables**: `r nrow(brief_screening_v2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 4055 
+<br>**Recruitment Dates**: May 2017 - Mar 2020 
+<br>**Recruitment Method**: Participant/ Parent/ Carer Self-completed or Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment Screening (v2)/Brief Assessment Screening (v2).csv",
+  name = "NCMH Brief Assessment Screening (v2)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment Screening (v2)/Brief Assessment Screening (v2).pdf",
+  name = "NCMH Brief Assessment Screening (v2)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_screening_v2)
+
+```
+
+## Brief Assessment Screening (Other)
+
+Alongside the second iteration of the NCMH Brief Assessment, other
+variants of the assessment were developed and administered in parallel.
+Each assessment differed in content and target population.
+
+### Brief Assessment NDAU
+
+```{r, echo = FALSE}
+
+brief_ndau <- read.csv("../Individual_Surveys/Brief Assessment NDAU/Brief Assessment NDAU.csv")
+
+```
+
+Administered to small number of participants, this assessment focuses on
+children with neurodevelopmental disorders as part of the
+Neurodevelopment Assessment Unit (NDAU) research project. This collected
+details about the participants and parents demographics.
+
+**Total Variables**: `r nrow(brief_ndau %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 163 
+<br>**Recruitment Dates**: Jan 2018 - Feb 2020 
+<br>**Recruitment Method**: Parent Self-completed or Researcher Administered <br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment NDAU/Brief Assessment NDAU.csv",
+  name = "NCMH Brief Assessment NDAU",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment NDAU/Brief Assessment NDAU.pdf",
+  name = "NCMH Brief Assessment NDAU",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_ndau)
+
+```
+
+### Brief Assessment Perinatal
+
+```{r, echo = FALSE}
+
+brief_perinatal <- read.csv("../Individual_Surveys/Brief Assessment Perinatal/Brief Assessment Perinatal.csv")
+
+```
+
+Administered to small number of participants, this assessment focuses on
+participants in the perinatal period. Minor modification to the original
+Brief Assessment Screening were made, with questions referring to
+experiences during the perinatal period. This collected details about
+the participants demographics, family demographics, children, pregnancy,
+psychiatric history, social factors, treatments, family psychiatric
+history, physical health, and substance use.
+
+**Total Variables**: `r nrow(brief_perinatal %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 9 
+<br>**Recruitment Dates**: Mar 2018 - Sep 2018 
+<br>**Recruitment Method**: Participant/ Parent/ Carer Self-completed or Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment Perinatal/Brief Assessment Perinatal.csv",
+  name = "NCMH Brief Assessment Perinatal",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment Perinatal/Brief Assessment Perinatal.pdf",
+  name = "NCMH Brief Assessment Perinatal",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_perinatal)
+
+```
+
+### Brief Assessment LD
+
+```{r, echo = FALSE}
+
+brief_ld <- read.csv("../Individual_Surveys/Brief Assessment LD/Brief Assessment LD.csv")
+
+```
+
+Administered to small number of participants, this assessment focuses on
+participants with Learning Difficulties (LD). Modification to the
+original Brief Assessment Screening were made, with questions being
+tailored to individuals with LD (e.g. simplified question wording). This
+collected details about the participants demographics, family
+demographics, psychiatric history, physical health, support, and
+neuroimaging.
+
+**Total Variables**: `r nrow(brief_ld %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 36 
+<br>**Recruitment Dates**: Jan 2017 - Mar 2020 
+<br>**Recruitment Method**: Participant Self-completed or Researcher Administered 
+<br>**Data Collection Method**: FORMIC
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment LD/Brief Assessment LD.csv",
+  name = "NCMH Brief Assessment LD",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment LD/Brief Assessment LD.pdf",
+  name = "NCMH Brief Assessment LD",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_ld)
+
+```
+
+### Brief Assessment LD Carer
+
+```{r, echo = FALSE}
+
+brief_ldcarer <- read.csv("../Individual_Surveys/Brief Assessment LD Carer/Brief Assessment LD Carer.csv")
+
+```
+
+Administered to small number of participants, this assessment focuses on
+participants with Learning Difficulties (LD) and is completed by the
+participants carer. Modification to the original Brief Assessment
+Screening were made, with questions being tailored to individuals with
+LD (e.g. simplified question wording). This collected details about the
+participants demographics, informant/ next of kin information, family
+demographics, psychiatric history, family psychiatric history, physical
+health, support, neuroimaging, and aggressive behaviour.
+
+**Total Variables**: `r nrow(brief_ld %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 12 
+<br>**Recruitment Dates**: Jan 2017 - Feb 2020 
+<br>**Recruitment Method**: Carer Self-completed or Researcher Administered <br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: MOAS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment LD Carer/Brief Assessment LD Carer.csv",
+  name = "NCMH Brief Assessment LD Carer",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment LD Carer/Brief Assessment LD Carer.pdf",
+  name = "NCMH Brief Assessment LD Carer",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_ldcarer)
+
+```
+
+## Brief Assessment Online
+
+The third iterations of the NCMH Brief Assessment, developed when NCMH
+transitioned from focusing on researcher-led recruitment to online,
+participant-led recruitment.
+
+```{r, echo = FALSE}
+
+brief_online <- read.csv("../Individual_Surveys/Brief Assessment Online/Brief Assessment Online.csv")
+
+```
+
+This assessment was administered to a very large number of participants
+during this recruitment period, contributing towards a major proportion
+in total participants recruited to the NCMH cohort. This collected
+details about the participants demographics, psychiatric history,
+treatments, children, family psychiatric history, physical health, and
+substance use.
+
+**Total Variables**: `r nrow(brief_online %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 12,415 
+<br>**Recruitment Dates**: Feb 2017 - Present 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Open
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment Online/Brief Assessment Online.csv",
+  name = "NCMH Brief Assessment Online",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment Online/Brief Assessment Online.pdf",
+  name = "NCMH Brief Assessment Online",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_online)
+
+```
+
+## Brief Assessment Under 18s
+
+The third iterations of the NCMH Brief Assessment focusing on
+recruitment of children and young people under 18-years, developed when
+NCMH transitioned from focusing on researcher-led recruitment to online,
+participant-led recruitment.
+
+```{r, echo = FALSE}
+
+brief_under18 <- read.csv("../Individual_Surveys/Brief Assessment Under 18s/Brief Assessment Under 18s.csv")
+
+```
+
+This assessment was administered to a small number of participants
+during this recruitment period. This collected details about the
+participants and parents/ guardians demographics.
+
+**Total Variables**: `r nrow(brief_under18 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 10 
+<br>**Recruitment Dates**: Apr 2018 - Apr 2024 
+<br>**Recruitment Method**: Parent Self-completed 
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Brief Assessment Under 18s/Brief Assessment Under 18s.csv",
+  name = "NCMH Brief Assessment Under 18s",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Brief Assessment Under 18s/Brief Assessment Under 18s.pdf",
+  name = "NCMH Brief Assessment Under 18s",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = brief_under18)
+
+```
+
+# NCMH RESEARCH COMMUNITY
+
+Initiated in 2025, the NCMH Research Community was developed to build on
+all the research conducted in the 14-years prior, with the emphasis on
+greater participant engagement and a focus on developing an online
+research community. Starting with a signup survey (developed using
+pre-existing questions from our **NCMH Brief Assessment**), participants
+would provide basic demographic and psychiatric history information. Following this, the aim of the research community was to keep
+participants engaged with regular (6-12-monthly) followups containing
+questions on relevant research topics.
+
+## Research Community Signup
+
+```{r, echo = FALSE}
+
+rescom_signup <- read.csv("../Individual_Surveys/Research Community Signup/Research Community Signup.csv", fileEncoding = "latin1")
+
+```
+
+This assessment was administered to all new participants entering the
+NCMH cohort, as well as being sent to existing participants to allow for
+existing data to be refreshed. This collected details about the
+participants demographics, psychiatric history, treatments, children,
+family psychiatric history, treatments, physical health, and substance
+use.
+
+**Total Variables**: `r nrow(rescom_signup %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 0 
+<br>**Recruitment Dates**: TBC
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: REDCap (Online) 
+<br>**Status**: Pending Approval
+<br>**Principal Investigator**: Prof. Jonathan Bisson 
+<br>**Standardised Scales Included**: AUDIT-C
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Research Community Signup/Research Community Signup.csv",
+  name = "NCMH Research Community Signup",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Research Community Signup/Research Community Signup.pdf",
+  name = "NCMH Research Community Signup",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = rescom_signup)
+
+```
+
+# INDEPTH MOOD AND PSYCHOSIS (SCAN) ASSESSMENTS
+
+Developed as a detailed follow-up assessment to the early versions of
+the NCMH Brief Assessment, the 'indepth' assessment was conducted with a
+researcher and involved a thorough assessment of the participants
+psychiatric history. Many questions on the indepth assessments were
+copied from the **Brief Assessment Screening**, with additional sections
+being added to validate psychiatric diagnoses using OPCRIT scales.
+
+## Indepth Mood and Psychosis Assessment (V2)
+
+```{r, echo = FALSE}
+
+indepth_v2 <- read.csv("../Individual_Surveys/Indepth Mood and Psychosis Assessment (V2)/Indepth Mood and Psychosis Assessment (V2).csv")
+
+```
+
+The first live version (V2) of the assessment was administered to a
+small number participants during this recruitment period. This collected
+details about the participants demographics, informant/ next of kin
+information, family demographics, children, psychiatric history, social
+factors, treatments, family psychiatric history, physical health,
+substance use, OPCRIT scales, early development, episodes of depression,
+episodes of bipolar, episodes of psychosis, perinatal episodes, and DSM/
+ICD measures.
+
+**Total Variables**: `r nrow(indepth_v2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 16 
+<br>**Recruitment Dates**: Aug 2017 - Nov 2017 
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: CLEQ, PAS, GAS, SOFAS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Indepth Mood and Psychosis Assessment (V2)/Indepth Mood and Psychosis Assessment (V2).csv",
+  name = "NCMH Indepth Mood and Psychosis (v2)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Indepth Mood and Psychosis Assessment (V2)/Indepth Mood and Psychosis Assessment (V2).pdf",
+  name = "NCMH Indepth Mood and Psychosis (v2)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = indepth_v2)
+
+```
+
+## Indepth Mood and Psychosis Assessment (V3)
+
+```{r, echo = FALSE}
+
+indepth_v3 <- read.csv("../Individual_Surveys/Indepth Mood and Psychosis Assessment (V3)/Indepth Mood and Psychosis Assessment (V3).csv")
+
+```
+
+The second live version (V3) of the assessment was administered to a
+larger number participants during this recruitment period. This
+collected details about the participants demographics, informant/ next
+of kin information, family demographics, children, psychiatric history,
+social factors, treatments, family psychiatric history, physical health,
+substance use, OPCRIT scales, early development, episodes of depression,
+episodes of bipolar, episodes of psychosis, perinatal episodes, and DSM/
+ICD measures. Additionally, this version assesses hospital admissions,
+co-occurrence of psychotic symptoms, and perinatal psychiatric sequelae.
+
+**Total Variables**: `r nrow(indepth_v3 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 523 
+<br>**Recruitment Dates**: Aug 2017 - Mar 2020 
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: CLEQ, PAS, GAS, SOFAS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Indepth Mood and Psychosis Assessment (V3)/Indepth Mood and Psychosis Assessment (V3).csv",
+  name = "NCMH Indepth Mood and Psychosis (v3)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Indepth Mood and Psychosis Assessment (V3)/Indepth Mood and Psychosis Assessment (V3).pdf",
+  name = "NCMH Indepth Mood and Psychosis (v3)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = indepth_v3)
+
+```
+
+# ADULT QUESTIONNAIRES (AQs)
+
+Developed in 2011, Adult Questionnaires (AQs) were administered to a
+large proportion of the cohort following the completion of an **NCMH
+Brief Assessment**. The AQs were largely self-completed assessments
+which included various standardised clinical scales (e.g. PHQ-9, GAD-7,
+etc.) and were completed in the participants own time; often sent to
+participants and returned by post using the address details provided in
+the Brief Assessment. The AQs covered a wide range of topic, with
+several variations being developed over time.
+
+## Adult Questionnaire (2012-2016)
+
+```{r, echo = FALSE}
+
+aq_v1 <- read.csv("../Individual_Surveys/Adult Questionnaire (2012-2016)/Adult Questionnaire (2012-2016).csv")
+
+```
+
+The first version of the AQ was administered to a large number of
+participants during this recruitment period. This collected details on
+depression symptoms, bipolar symptoms, personality traits, life event/
+trauma experiences, neurodevelopmental symptoms, and schizotypal
+personality traits.
+
+**Total Variables**: `r nrow(aq_v1 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 3465 
+<br>**Recruitment Dates**: Jan 2012 - Nov 2016
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: BDI, AMS, EPQ, TSQ, LEC-5, ASRS, AQ-S, HCL-32, SPQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2012-2016)/Adult Questionnaire (2012-2016).csv",
+  name = "NCMH Adult Questionnaire (2012-2016)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2012-2016)/Adult Questionnaire (2012-2016).pdf",
+  name = "NCMH Adult Questionnaire (2012-2016)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_v1)
+
+```
+
+## Adult Questionnaire (2014)
+
+```{r, echo = FALSE}
+
+aq_v2 <- read.csv("../Individual_Surveys/Adult Questionnaire (2014)/Adult Questionnaire (2014).csv")
+
+```
+
+Administered alongside the AQ 2012-2016, the AQ 2014 was administered to
+a small number of participants during this recruitment period. This
+collected similar information to the AQ 2012-2016 with some scales being
+removed. This collected details on depression symptoms, bipolar
+symptoms, neurodevelopmental symptoms, and schizotypal personality
+traits.
+
+**Total Variables**: `r nrow(aq_v2 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 313 
+<br>**Recruitment Dates**: Jul 2014 - Nov 2014
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: BDI, AMS, ASRS, AQ-S, HCL-32, SPQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2014)/Adult Questionnaire (2014).csv",
+  name = "NCMH Adult Questionnaire (2014)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2014)/Adult Questionnaire (2014).pdf",
+  name = "NCMH Adult Questionnaire (2014)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_v2)
+
+```
+
+## Adult Questionnaire (2015-2016)
+
+```{r, echo = FALSE}
+
+aq_v3 <- read.csv("../Individual_Surveys/Adult Questionnaire (2015-2016)/Adult Questionnaire (2015-2016).csv")
+
+```
+
+Administered alongside the AQ 2012-2016, the AQ 2015-2016 was
+administered to a large number of participants during this recruitment
+period, but collected different information to the AQ 2012-2016. This
+collected details on medication adherence, mental illness stigma, work
+and social adjustment, childhood trauma, eating behaviours, anxiety and
+depression symptoms, social support, and autism traits.
+
+**Total Variables**: `r nrow(aq_v3 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 1098 
+<br>**Recruitment Dates**: Dec 2015 - Sep 2016
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MARS, ISMI, WSAS, ACE, SCOFF, HADS, SF-12, CAPE, MSPSS, AQ-10
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2015-2016)/Adult Questionnaire (2015-2016).csv",
+  name = "NCMH Adult Questionnaire (2015-2016)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2015-2016)/Adult Questionnaire (2015-2016).pdf",
+  name = "NCMH Adult Questionnaire (2015-2016)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_v3)
+
+```
+
+## Adult Questionnaire (2016-2018)
+
+```{r, echo = FALSE}
+
+aq_v4 <- read.csv("../Individual_Surveys/Adult Questionnaire (2016-2018)/Adult Questionnaire (2016-2018).csv")
+
+```
+
+Developed in 2016 and administered to a large number of participants,
+this AQ modified the scales using the previous AQs, with some scales
+removed and others introduced. This collected details on anxiety and
+depression symptoms, bipolar symptoms, mental illness stigma, childhood
+trauma, medication adherence, PTSD symptoms, and life events/ trauma
+experiences.
+
+**Total Variables**: `r nrow(aq_v4 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 563 
+<br>**Recruitment Dates**: Jul 2016 - Sep 2018
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: HADS, AMS, ISMI, ACE, MARS, PCL-5, LEC-5, SF-12, CAPE
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2016-2018)/Adult Questionnaire (2016-2018).csv",
+  name = "NCMH Adult Questionnaire (2016-2018)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2016-2018)/Adult Questionnaire (2016-2018).pdf",
+  name = "NCMH Adult Questionnaire (2016-2018)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_v4)
+
+```
+
+## Adult Questionnaire (2016-2020)
+
+```{r, echo = FALSE}
+
+aq_v5 <- read.csv("../Individual_Surveys/Adult Questionnaire (2016-2020)/Adult Questionnaire (2016-2020).csv")
+
+```
+
+Developed and administered alongside the AQ 2016-2018, this AQ collected
+information using the same scales; the wording/ inclusion of questions
+differing slightly between the versions. This collected details on
+anxiety and depression symptoms, bipolar symptoms, mental illness
+stigma, childhood trauma, medication adherence, PTSD symptoms, and life
+events/ trauma experiences.
+
+**Total Variables**: `r nrow(aq_v5 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 2595 
+<br>**Recruitment Dates**: Oct 2016 - Mar 2020
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: HADS, AMS, ISMI, ACE, MARS, PCL-5, LEC-5, SF-12, CAPE
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2016-2020)/Adult Questionnaire (2016-2020).csv",
+  name = "NCMH Adult Questionnaire (2016-2020)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2016-2020)/Adult Questionnaire (2016-2020).pdf",
+  name = "NCMH Adult Questionnaire (2016-2020)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_v5)
+
+```
+
+## Adult Questionnaire (2022-2023)
+
+```{r, echo = FALSE}
+
+aq_v6 <- read.csv("../Individual_Surveys/Adult Questionnaire (2022-2023)/Adult Questionnaire (2022-2023).csv")
+
+```
+
+Administed to a very small number of participants, this AQ collected
+information using many of the same scales as the AQ 2022-2023, with some
+scales added and others removed. This collected details on anxiety and
+depression symptoms, bipolar symptoms, childhood trauma, medication
+adherence, life events/ trauma experiences, and sleep quality.
+
+**Total Variables**: `r nrow(aq_v6 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 4 
+<br>**Recruitment Dates**: Jul 2022 - Feb 2023
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: HADS, AMS, ACE, MARS, ITQ, LEC-5, SF-12, CAPE, PSQI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2022-2023)/Adult Questionnaire (2022-2023).csv",
+  name = "NCMH Adult Questionnaire (2022-2023)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire (2022-2023)/Adult Questionnaire (2022-2023).pdf",
+  name = "NCMH Adult Questionnaire (2022-2023)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_v6)
+
+```
+
+## Adult Questionnaire Young Persons
+
+```{r, echo = FALSE}
+
+aq_yp <- read.csv("../Individual_Surveys/Adult Questionnaire Young Persons/Adult Questionnaire Young Persons.csv")
+
+```
+
+This AQ was developed solely to be administered to children and young
+people (under 18-years of age), following the completion of an **NCMH
+Brief Assessment** by a parent or guardian. This collected details on
+the participants strengths and difficulties, depression symptoms,
+bipolar symptoms, autism symptoms, and psychotic symptoms.
+
+**Total Variables**: `r nrow(aq_yp %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 96 
+<br>**Recruitment Dates**: Feb 2012 - Mar 2020
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: SDQ, MFQ, HCL-32, AQ, APSS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Young Persons/Adult Questionnaire Young Persons.csv",
+  name = "NCMH Adult Questionnaire Young Persons",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Young Persons/Adult Questionnaire Young Persons.pdf",
+  name = "NCMH Adult Questionnaire Young Persons",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_yp)
+
+```
+
+## Adult Questionnaire Parents
+
+```{r, echo = FALSE}
+
+aq_parent <- read.csv("../Individual_Surveys/Adult Questionnaire Parents/Adult Questionnaire Parents.csv")
+
+```
+
+This AQ was developed to be completed by parents/ guardians of
+participants in the cohort. This collected details on the participants
+strengths and difficulties, depression symptoms, social communication,
+participant behaviours, and bipolar symptoms.
+
+**Total Variables**: `r nrow(aq_parent %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 191 
+<br>**Recruitment Dates**: Feb 2012 - Feb 2020 
+<br>**Recruitment Method**: Parent Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: SDQ, MFQ, SCQ, CPRS, CMRS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Parents/Adult Questionnaire Parents.csv",
+  name = "NCMH Adult Questionnaire Parent",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Parents/Adult Questionnaire Parents.pdf",
+  name = "NCMH Adult Questionnaire Parent",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_parent)
+
+```
+
+## Adult Questionnaire Perinatal 1
+
+```{r, echo = FALSE}
+
+aq_peri_1 <- read.csv("../Individual_Surveys/Adult Questionnaire Perinatal 1/Adult Questionnaire Perinatal 1.csv")
+
+```
+
+Part 1 of 2; this AQ was developed to be completed by participants in
+the perinatal period or recruited through baseline assessments relating
+to the perinatal period. This collected details on the participants
+anxiety and depression symptoms, childhood trauma, life events/ trauma
+experiences, bipolar symptoms, personality disorder symptoms, and
+postnatal depression symptoms.
+
+**Total Variables**: `r nrow(aq_peri_1 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 111 
+<br>**Recruitment Dates**: Dec 2017 - Mar 2020 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: HADS, ACE, PCL-5, AMS, IPDE, EPDS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Perinatal 1/Adult Questionnaire Perinatal 1.csv",
+  name = "NCMH Adult Questionnaire Perinatal 1",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Perinatal 1/Adult Questionnaire Perinatal 1.pdf",
+  name = "NCMH Adult Questionnaire Perinatal 1",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_peri_1)
+
+```
+
+## Adult Questionnaire Perinatal 2
+
+```{r, echo = FALSE}
+
+aq_peri_2 <- read.csv("../Individual_Surveys/Adult Questionnaire Perinatal 2/Adult Questionnaire Perinatal 2.csv")
+
+```
+
+Part 2 of 2; this AQ was developed to be completed by participants in
+the perinatal period or recruited through baseline assessments relating
+to the perinatal period. This collected details on the participants
+medication adherence, life events/ trauma experiences, sleep quality,
+relationships, resilience, and emotion regulation.
+
+**Total Variables**: `r nrow(aq_peri_2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 64 
+<br>**Recruitment Dates**: Nov 2016 - Feb 2020 
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MARS, LEC-5, PSQI, ECR-S, CD-RISC-10, ERQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Perinatal 2/Adult Questionnaire Perinatal 2.csv",
+  name = "NCMH Adult Questionnaire Perinatal 2",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Adult Questionnaire Perinatal 2/Adult Questionnaire Perinatal 2.pdf",
+  name = "NCMH Adult Questionnaire Perinatal 2",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = aq_peri_2)
+
+```
+
+# COVID-19 ASSESSMENTS
+
+Developed in 2020, the COVID-19 assessments were created as a direct
+result of the COVID-19 pandemic. Administered to a large proportion of
+the existing NCMH cohort - as well as new participants through open
+recruitment - multiple assessments were developed focussing on topical
+research areas. Multiple baseline assessments were administered, the
+content of which largely borrowed from the **NCMH Brief Assessment Online** with additional questions focussing on COVID-19 being included.
+Three followup assessments were administered to all participants
+completing a baseline, each followup specialising in different research
+topics.
+
+## COVID-19 Baseline (Open)
+
+```{r, echo = FALSE}
+
+covid_open <- read.csv("../Individual_Surveys/COVID-19 Baseline (Open)/COVID-19 Baseline (Open).csv")
+
+```
+
+This baseline assessment was administered to a small number of
+participants through open recruitment (e.g. social media, newsletters,
+NCMH website). This collected details about the participants
+demographics, social variables, children/ family, psychiatric history,
+COVID-19 experience/ impact, employment, domestic abuse, depression and
+anxiety symptoms, wellbeing, and access to care/ services.
+
+**Total Variables**: `r nrow(covid_open %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 305 
+<br>**Recruitment Dates**: Jun 2020 - Feb 2021 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: WHO-5, GAD-7, PHQ-9
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/COVID-19 Baseline (Open)/COVID-19 Baseline (Open).csv",
+  name = "NCMH COVID-19 Baseline Open",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/COVID-19 Baseline (Open)/COVID-19 Baseline (Open).pdf",
+  name = "NCMH COVID-19 Baseline Open",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = covid_open)
+
+```
+
+## COVID-19 Baseline (Systematic)
+
+```{r, echo = FALSE}
+
+covid_openop <- read.csv("../Individual_Surveys/COVID-19 Baseline (Systematic)/COVID-19 Baseline (Systematic).csv")
+
+```
+
+This baseline assessment was administered to a relatively large number
+of participants through systematic recruitment whereby participants were
+signposted to the study at NHS healthboards/ sites. This collected
+details about the participants demographics, social variables, children/
+family, psychiatric history, COVID-19 experience/ impact, employment,
+domestic abuse, depression and anxiety symptoms, wellbeing, and access
+to care/ services.
+
+**Total Variables**: `r nrow(covid_openop %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 367 
+<br>**Recruitment Dates**: Sep 2020 - Feb 2021 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: WHO-5, GAD-7, PHQ-9
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/COVID-19 Baseline (Systematic)/COVID-19 Baseline (Systematic).csv",
+  name = "NCMH COVID-19 Baseline Systematic",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/COVID-19 Baseline (Systematic)/COVID-19 Baseline (Systematic).pdf",
+  name = "NCMH COVID-19 Baseline Systematic",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = covid_openop)
+
+```
+
+## COVID-19 Baseline (Existing)
+
+```{r, echo = FALSE}
+
+covid_existing <- read.csv("../Individual_Surveys/COVID-19 Baseline (Existing)/COVID-19 Baseline (Existing).csv")
+
+```
+
+This baseline assessment was administered to a large number of existing
+NCMH participants, likely recruited through one of our **NCMH Brief
+Assessments** on a previous occassion. This collected details about the
+participants demographics, social variables, children/ family,
+psychiatric history, COVID-19 experience/ impact, employment, domestic
+abuse, depression and anxiety symptoms, wellbeing, and access to care/
+services.
+
+**Total Variables**: `r nrow(covid_existing %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 3163 
+<br>**Recruitment Dates**: Jun 2020 - Feb 2021 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: WHO-5, GAD-7, PHQ-9
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/COVID-19 Baseline (Existing)/COVID-19 Baseline (Existing).csv",
+  name = "NCMH COVID-19 Baseline Existing",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/COVID-19 Baseline (Existing)/COVID-19 Baseline (Existing).pdf",
+  name = "NCMH COVID-19 Baseline Existing",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = covid_existing)
+
+```
+
+## COVID-19 Followup 1
+
+```{r, echo = FALSE}
+
+covid_fu1 <- read.csv("../Individual_Surveys/COVID-19 Followup 1/COVID-19 Followup 1.csv")
+
+```
+
+Followup assessments were administered to all participants who completed
+a COVID-19 baseline assessment (any version). This followup was the
+first version developed and specifically focussed on the participants'
+experiences of trauma, as well as the participants general mental
+health, quality of life, and impact of COVID-19.
+
+**Total Variables**: `r nrow(covid_fu1 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 2082 
+<br>**Recruitment Dates**: Nov 2020 - Feb 2021 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: EQ-5D-3L, WHO-5, GAD-7, PHQ-9, ITQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/COVID-19 Followup 1/COVID-19 Followup 1.csv",
+  name = "NCMH COVID-19 Followup 1",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/COVID-19 Followup 1/COVID-19 Followup 1.pdf",
+  name = "NCMH COVID-19 Followup 1",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = covid_fu1)
+
+```
+
+## COVID-19 Followup 2
+
+```{r, echo = FALSE}
+
+covid_fu2 <- read.csv("../Individual_Surveys/COVID-19 Followup 2/COVID-19 Followup 2.csv")
+
+```
+
+Followup assessments were administered to all participants who completed
+a COVID-19 baseline assessment (any version). This followup was the
+second version developed and specifically focussed on the participants'
+sleep quality, as well as the participants general mental health,
+quality of life, and impact of COVID-19.
+
+**Total Variables**: `r nrow(covid_fu2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 1704 
+<br>**Recruitment Dates**: Dec 2020 - Apr 2021 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: EQ-5D-3L, WHO-5, GAD-7, PHQ-9, PSQI, SHI, ESS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/COVID-19 Followup 2/COVID-19 Followup 2.csv",
+  name = "NCMH COVID-19 Followup 2",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/COVID-19 Followup 2/COVID-19 Followup 2.pdf",
+  name = "NCMH COVID-19 Followup 2",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = covid_fu2)
+
+```
+
+## COVID-19 Followup 3
+
+```{r, echo = FALSE}
+
+covid_fu3 <- read.csv("../Individual_Surveys/COVID-19 Followup 3/COVID-19 Followup 3.csv")
+
+```
+
+Followup assessments were administered to all participants who completed
+a COVID-19 baseline assessment (any version). This followup was the
+third version developed and specifically focussed on the participants'
+eating, exercise, and related behaviours; as well as the participants
+general mental health, quality of life, and impact of COVID-19.
+
+**Total Variables**: `r nrow(covid_fu3 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 1555 
+<br>**Recruitment Dates**: Feb 2021 - Apr 2021 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Alchemer (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: EQ-5D-3L, WHO-5, GAD-7, PHQ-9, EDE-QS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/COVID-19 Followup 3/COVID-19 Followup 3.csv",
+  name = "NCMH COVID-19 Followup 3",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/COVID-19 Followup 3/COVID-19 Followup 3.pdf",
+  name = "NCMH COVID-19 Followup 3",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = covid_fu3)
+
+```
+
+# UKMINDS ***
+
+In collaboration with Akrivia Health (https://akriviahealth.com/), NCMH recruited over 1800 participants with neuropsychiatric or neurodegenerative conditions for extensive phenotypic and genotypic data collection; the project was known as **UKMINDS**. Alongside the datasets mentioned here, the project greatly emphasised the collection of biomarker samples (i.e. DNA, RNA, Plasma, PBMC, and Serum) for sequencing/ analysis. Two primary cohorts were established for this study, individuals with mood and psychosis diagnoses (neuropsychiatric cohort) and those with dementia and cognitive impairments (neurodegenerative cohort), each of which had different baseline assessments and Adult Questionnaires (AQs). 
+
+## UKMINDS Mood and Psychosis Baseline
+
+```{r, echo = FALSE}
+
+ukm_base_moodpsych <- read.csv("../Individual_Surveys/Baseline MoodPsychosis/Baseline MoodPsychosis.csv", fileEncoding = "latin1")
+
+```
+
+This assessment was administered to the majority of participants recruited into the study; those with a mood and/ or psychosis (neuropsychiatric) diagnosis. All recruitment originated from NHS healthboards/ sites or NCMH senior psychology assistants (SPAs). This collected details about the participants demographics, psychiatric history, psychosis symptoms, depression symptoms, bipolar symptoms, treatments, physical health, and intelligence.
+
+**Total Variables**: `r nrow(ukm_base_moodpsych %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 1647
+<br>**Recruitment Dates**: Jan 2023 - Aug 2024
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: SmartSurvey (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. James Walters 
+<br>**Standardised Scales Included**: PHQ-9, GAD-7, NART
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Baseline MoodPsychosis/Baseline MoodPsychosis.csv",
+  name = "NCMH UKMINDS Mood and Psychosis Baseline",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Baseline MoodPsychosis/Baseline MoodPsychosis.pdf",
+  name = "NCMH UKMINDS Mood and Psychosis Baseline",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ukm_base_moodpsych)
+
+```
+
+## UKMINDS Dementia and Cognitive Impairment Baseline
+
+```{r, echo = FALSE}
+
+ukm_base_demcog <- read.csv("../Individual_Surveys/Baseline DementiaCognitive/Baseline DementiaCognitive.csv", fileEncoding = "latin1")
+
+```
+
+This assessment was administered to a small proportion of participants recruited into the study; those with a dementia diagnosis or cognitive impairment (neurodegenerative). All recruitment originated from NHS healthboards/ sites or NCMH senior psychology assistants (SPAs). Where the participant lacked capacity to complete the assessment alone (with a researcher), a consultee (e.g. carer, relative) was present. This collected details about the participants demographics, study partner/ informant demographics, family psychiatric history, cognitive impairment, case history, medical history, physical health, and daily functioning. 
+
+**Total Variables**: `r nrow(ukm_base_demcog %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 154
+<br>**Recruitment Dates**: Mar 2023 - Aug 2024
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: SmartSurvey (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. James Walters 
+<br>**Standardised Scales Included**: MoCA, BADLS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Baseline DementiaCognitive/Baseline DementiaCognitive.csv",
+  name = "NCMH UKMINDS Dementia and Cognitive Impairment Baseline",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Baseline DementiaCognitive/Baseline DementiaCognitive.pdf",
+  name = "NCMH UKMINDS Dementia and Cognitive Impairment Baseline",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ukm_base_demcog)
+
+```
+
+## UKMINDS Dementia and Cognitive Impairment MoCA
+
+```{r, echo = FALSE}
+
+ukm_moca_demcog <- read.csv("../Individual_Surveys/Baseline DementiaCognitive MoCA/Baseline DementiaCognitive MoCA.csv", fileEncoding = "latin1")
+
+```
+
+This standalone Montreal Cognitive Assessment (MoCA) assessment was administered to a small number of participants from the dementia and cognitive impairment (neurodegenerative) cohort. Due to the MoCA being introduced into the **Dementia and Cognitive Impairment Baseline** a few months after recruitment started, some early participants in this cohort didnt complete the MoCA. As such, these participants were re-contacted to complete this standalone MoCA assessment in order to avoid there being missing data for these participants. This collected details about the participants demographics and cognitive impairment only. 
+
+**Total Variables**: `r nrow(ukm_moca_demcog %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 28
+<br>**Recruitment Dates**: Jan 2024 - Jun 2024
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: SmartSurvey (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. James Walters 
+<br>**Standardised Scales Included**: MoCA
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Baseline DementiaCognitive MoCA/Baseline DementiaCognitive MoCA.csv",
+  name = "NCMH UKMINDS Dementia and Cognitive Impairment MoCA",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Baseline DementiaCognitive MoCA/Baseline DementiaCognitive MoCA.pdf",
+  name = "NCMH UKMINDS Dementia and Cognitive Impairment MoCA",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ukm_moca_demcog)
+
+```
+
+## UKMINDS Mood and Psychosis Adult Questionnaire (AQ)
+
+```{r, echo = FALSE}
+
+ukm_aq_moodpsych <- read.csv("../Individual_Surveys/AQ MoodPsychosis/AQ MoodPsychosis.csv", fileEncoding = "latin1")
+
+```
+
+Administered to all participants who completed the **UKMINDS Mood and Psychosis Baseline Assessment**, the Adult Questionnaire (AQ) were self-completed assessments which participants often completed in their own time. Most AQs were emailed to participants following the completion of the baseline assessments, however some were sent to participants home address for completion in paper form; these forms were then inputted on SmartSurvey by an NCMH staff member. This collected details about the participants alcohol use, life events/ trauma experiences, disabilities, and experiences of anhedonia. 
+
+**Total Variables**: `r nrow(ukm_aq_moodpsych %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 554
+<br>**Recruitment Dates**: Jan 2023 - Sep 2024
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: SmartSurvey (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. James Walters 
+<br>**Standardised Scales Included**: AUDIT, CTQ-SF, WHODAS, SHAPS, DARS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/AQ MoodPsychosis/AQ MoodPsychosis.csv",
+  name = "NCMH UKMINDS Mood and Psychosis AQ",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/AQ MoodPsychosis/AQ MoodPsychosis.pdf",
+  name = "NCMH UKMINDS Mood and Psychosis AQ",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ukm_aq_moodpsych)
+
+```
+
+## UKMINDS Dementia and Cognitive Impairment Adult Questionnaire (AQ)
+
+```{r, echo = FALSE}
+
+ukm_aq_democog <- read.csv("../Individual_Surveys/AQ DementiaCognitive/AQ DementiaCognitive.csv", fileEncoding = "latin1")
+
+```
+
+Administered only to participants who were deemed to have appropriate capacity to complete the Adult Questionnaire (AQ) following the completion of the **UKMINDS Dementia and Cognitive Impairment Baseline Assessment**. The AQ were self-completed assessments which participants often completed in their own time. Most AQs were emailed to participants following the completion of the baseline assessments, however some were sent to participants home address for completion in paper form; these forms were then inputted on SmartSurvey by an NCMH staff member. This collected details about the participants quality of life, anxiety and depression symptoms, and sleep quality. 
+
+Note: There were two versions of the EuroQol-5D Assessment (EQ-5D-5L and EQ-5D-3L) included in this assessment. This was an error during the design process that was not detected until the study was actively recruiting (~20/04/2024). Once the error was detected, the EQ-5D-3L was hidden from participant view on SmartSurvey so only the EQ-5D-5L could be completed.
+
+**Total Variables**: `r nrow(ukm_aq_democog %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 52
+<br>**Recruitment Dates**: Oct 2023 - Aug 2024
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: SmartSurvey (Online) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. James Walters 
+<br>**Standardised Scales Included**: EQ-5D-5L, HADS, EQ-5D-3L, ESS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/AQ DementiaCognitive/AQ DementiaCognitive.csv",
+  name = "NCMH UKMINDS Dementia and Cognitive Impairment AQ",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/AQ DementiaCognitive/AQ DementiaCognitive.pdf",
+  name = "NCMH UKMINDS Dementia and Cognitive Impairment AQ",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ukm_aq_democog)
+
+```
+
+# SLEEP ASSESSMENTS
+
+Developed in 2016, various sleep interviews and questionnaires were developed to assess participants sleep quality and factors affecting their sleep. Alongside researcher-led interviews and participants self-completed questionnaires, participants also wore Actigraphy devices for a period of time to objectively measure their sleeping patterns. 
+
+## Sleep Assessment Interview 1 (v1)
+
+```{r, echo = FALSE}
+
+sleep_int1v1 <- read.csv("../Individual_Surveys/NCMH Sleep Study Interview1 v1/NCMH Sleep Study Interview1 v1.csv")
+
+```
+
+Part 1 of 2; adapted from the Mini International Neuropsychiatric Interview (MINI), this is the first version of the initial researcher-led interview conducted with participants. This collected details about the participants depression symptoms, bipolar symptoms, psychotic symptoms, anxiety symptoms, treatments, psychiatric history, life events/ trauma experiences, sleep disorder symptoms, chronotype, sleep behaviours, and substance use. 
+
+**Total Variables**: `r nrow(sleep_int1v1 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 43 
+<br>**Recruitment Dates**: Apr 2016 - Sep 2016 
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MINI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview1 v1/NCMH Sleep Study Interview1 v1.csv",
+  name = "NCMH Sleep Assessment Interview 1 (v1)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview1 v1/NCMH Sleep Study Interview1 v1.pdf",
+  name = "NCMH Sleep Assessment Interview 1 (v1)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = sleep_int1v1)
+
+```
+
+## Sleep Assessment Interview 1 (v2)
+
+```{r, echo = FALSE}
+
+sleep_int1v2 <- read.csv("../Individual_Surveys/NCMH Sleep Study Interview1 v2/NCMH Sleep Study Interview1 v2.csv")
+
+```
+
+Part 1 of 2; adapted from the Mini International Neuropsychiatric Interview (MINI), this is the second version of the initial researcher-led interview conducted with participants. This collected details about the participants depression symptoms, bipolar symptoms, psychotic symptoms, anxiety symptoms, treatments, psychiatric history, life events/ trauma experiences, sleep disorder symptoms, chronotype, sleep behaviours, and substance use. This version differed from the first by including additional questions on narcolepsy, sleep apnoea, restless-leg syndrome, parasomnia, CRSD, chronotype, and substance use. 
+
+**Total Variables**: `r nrow(sleep_int1v2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 85
+<br>**Recruitment Dates**: Dec 2016 - Oct 2019 
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MINI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview1 v2/NCMH Sleep Study Interview1 v2.csv",
+  name = "NCMH Sleep Assessment Interview 1 (v2)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview1 v2/NCMH Sleep Study Interview1 v2.pdf",
+  name = "NCMH Sleep Assessment Interview 1 (v2)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = sleep_int1v2)
+
+```
+
+## Sleep Assessment Interview 2 (v1)
+
+```{r, echo = FALSE}
+
+sleep_int2v1 <- read.csv("../Individual_Surveys/NCMH Sleep Study Interview2 v1/NCMH Sleep Study Interview2 v1.csv")
+
+```
+
+Part 2 of 2; adapted from the Mini International Neuropsychiatric Interview (MINI), this is the first version of the second researcher-led interview conducted with participants. This collected details about the participants depression symptoms, bipolar symptoms, psychotic symptoms, anxiety symptoms, treatments, and coding of episodes/ diagnoses at followup interview. The data collected in this survey differed from the first research-led interview (**Sleep Study Interview 1 (v1/v2)**) as the focus was on epsides of mental illness experienced during the study (rather than during the participants lifetime).
+
+**Total Variables**: `r nrow(sleep_int2v1 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 41
+<br>**Recruitment Dates**: May 2016 - Apr 2017 
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MINI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview2 v1/NCMH Sleep Study Interview2 v1.csv",
+  name = "NCMH Sleep Assessment Interview 2 (v1)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview2 v1/NCMH Sleep Study Interview2 v1.pdf",
+  name = "NCMH Sleep Assessment Interview 2 (v1)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = sleep_int2v1)
+
+```
+
+## Sleep Assessment Interview 2 (v2)
+
+```{r, echo = FALSE}
+
+sleep_int2v2 <- read.csv("../Individual_Surveys/NCMH Sleep Study Interview2 v2/NCMH Sleep Study Interview2 v2.csv")
+
+```
+
+Part 2 of 2; adapted from the Mini International Neuropsychiatric Interview (MINI), this is the second version of the second researcher-led interview conducted with participants. This collected details about the participants depression symptoms, bipolar symptoms, psychotic symptoms, anxiety symptoms, treatments, and coding of episodes/ diagnoses at followup interview. The data collected in this survey differed from the first research-led interview (**Sleep Study Interview 1 (v1/v2)**) as the focus was on epsides of mental illness experienced during the study (rather than during the participants lifetime). This version appears not to differ from the first in any significant way, the only additional variable being one for researcher comments. 
+
+**Total Variables**: `r nrow(sleep_int2v2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 69
+<br>**Recruitment Dates**: Feb 2017 - Oct 2019 
+<br>**Recruitment Method**: Researcher Administered 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MINI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview2 v2/NCMH Sleep Study Interview2 v2.csv",
+  name = "NCMH Sleep Assessment Interview 2 (v2)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Interview2 v2/NCMH Sleep Study Interview2 v2.pdf",
+  name = "NCMH Sleep Assessment Interview 2 (v2)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = sleep_int2v2)
+
+```
+
+## Sleep Assessment Questionnaire (v1)
+
+```{r, echo = FALSE}
+
+sleep_qv1 <- read.csv("../Individual_Surveys/NCMH Sleep Study Questionnaire v1/NCMH Sleep Study Questionnaire v1.csv")
+
+```
+
+This is the first version of the participant self-completed questionnaire, administered to participants following the first researcher-led interview. Participants were asked to complete this questionnaire in their own time and return it at a later date (typically during the second researcher-led interview). This collected details about the participants chronotype, sleep quality, factors affecting sleep, bipolar symptoms, and depression symptoms. 
+
+**Total Variables**: `r nrow(sleep_qv1 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 43
+<br>**Recruitment Dates**: Apr 2016 - Sep 2016 
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MEQ, PSQI, SPAQ, AMS, BDI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Questionnaire v1/NCMH Sleep Study Questionnaire v1.csv",
+  name = "NCMH Sleep Assessment Questionnaire (v1)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Questionnaire v1/NCMH Sleep Study Questionnaire v1.pdf",
+  name = "NCMH Sleep Assessment Questionnaire (v1)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = sleep_qv1)
+
+```
+
+## Sleep Assessment Questionnaire (v2)
+
+```{r, echo = FALSE}
+
+sleep_qv2 <- read.csv("../Individual_Surveys/NCMH Sleep Study Questionnaire v2/NCMH Sleep Study Questionnaire v2.csv")
+
+```
+
+This is the second version of the participant self-completed questionnaire, administered to participants following the first researcher-led interview. Participants were asked to complete this questionnaire in their own time and return it at a later date (typically during the second researcher-led interview). This collected details about the participants chronotype, sleep quality, factors affecting sleep, and bipolar symptoms. This version differed from the first as it used a different scale to assess the participants depression symptoms, and also collected details on medication adherence, alcohol consumption, and emotion regulation.
+
+**Total Variables**: `r nrow(sleep_qv2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 80
+<br>**Recruitment Dates**: Dec 2016 - Apr 2018 
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: FORMIC 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MEQ, PSQI, SPAQ, AMS, PHQ, MARS, AUDIT, ERQ, DERS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Questionnaire v2/NCMH Sleep Study Questionnaire v2.csv",
+  name = "NCMH Sleep Assessment Questionnaire (v2)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/NCMH Sleep Study Questionnaire v2/NCMH Sleep Study Questionnaire v2.pdf",
+  name = "NCMH Sleep Assessment Questionnaire (v2)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = sleep_qv2)
+
+```
+
+# MATERNAL WELLBEING, MENTAL HEALTH, AND LIFE EVENTS (MWMHLE) ASSESSMENTS
+
+First developed in 2021, the Maternal Wellbeing, Mental Health, and Life Events (MWMHLE) study was developed to thoroughly investigate the experiences of currently pregnant and post-partum mothers. Two versions of the study have been developed to-date, both studying participants over a 12-month period through a self-completed baseline assessment and multiple followup assessments during this time period. Both assessments are very detailed and covered a large scope of questions, the second version differing slightly in content and structure from the first.   
+
+## MWMHLE (v1)
+
+This version of the MWMHLE assessment was split into 6 individual surveys on our survey provider (Alchemer). This consisted of 2 baseline assessments and 4 followup assessments, all of the details will be highlighted in the sections below. 
+
+### MWMHLE (v1) Baseline (Open)
+
+```{r, echo = FALSE}
+
+mwmhle_v1_open <- read.csv("../Individual_Surveys/MWMHLE Baseline Open/MWMHLE Baseline Open.csv", fileEncoding = "latin1")
+
+```
+
+This baseline assessment was administered to a large number of participants through open recruitment (e.g. social media, newsletters, NCMH website). This collected details about the participants demographics, pregnancy status, attachment, physical health, childbirth experiences, postpartum bonding, child sleeping behaviours, life events/ trauma experiences, social support, depression and anxiety symptoms, treatments, and psychiatric history. Some included questions differed depending on the participants pregnancy status (i.e. if they were post-partum the participant received additional questions compared to those who were currently pregnant).
+
+**Total Variables**: `r nrow(mwmhle_v1_open %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 642
+<br>**Recruitment Dates**: Jul 2021 - Aug 2023
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: Online (Alchemer) 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MAAS, IIQ, CEQ, PBQ, BISQ, PTGI, ACE, ITQ, MSPSS, PHQ-9, GAD-7
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MWMHLE Baseline Open/MWMHLE Baseline Open.csv",
+  name = "NCMH MWMHLE (v1) Baseline (Open)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MWMHLE Baseline Open/MWMHLE Baseline Open.pdf",
+  name = "NCMH MWMHLE (v1) Baseline (Open)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mwmhle_v1_open)
+
+```
+
+### MWMHLE (v1) Baseline (Systematic)
+
+```{r, echo = FALSE}
+
+mwmhle_v1_sys <- read.csv("../Individual_Surveys/MWMHLE Baseline NHS/MWMHLE Baseline NHS.csv", fileEncoding = "latin1")
+
+```
+
+This baseline assessment was administered to a large number of participants through systematic recruitment whereby participants were signposted to the study at NHS healthboards/ sites. This collected details about the participants demographics, pregnancy status, attachment, physical health, childbirth experiences, postpartum bonding, child sleeping behaviours, life events/ trauma experiences, social support, depression and anxiety symptoms, treatments, and psychiatric history. Some included questions differed depending on the participants pregnancy status (i.e. if they were post-partum the participant received additional questions compared to those who were currently pregnant). This version (systematic) does not differ significantly from the other (open) version of the baseline assessment, the only difference being some physical health questions have been removed from this version. 
+
+**Total Variables**: `r nrow(mwmhle_v1_sys %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 523
+<br>**Recruitment Dates**: May 2021 - Aug 2024
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: Online (Alchemer) 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MAAS, IIQ, CEQ, PBQ, BISQ, PTGI, ACE, ITQ, MSPSS, PHQ-9, GAD-7
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MWMHLE Baseline NHS/MWMHLE Baseline NHS.csv",
+  name = "NCMH MWMHLE (v1) Baseline (Systematic)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MWMHLE Baseline NHS/MWMHLE Baseline NHS.pdf",
+  name = "NCMH MWMHLE (v1) Baseline (Systematic)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mwmhle_v1_sys)
+
+```
+
+### MWMHLE (v1) Followup (1 Week)
+
+```{r, echo = FALSE}
+
+mwmhle_v1_1week <- read.csv("../Individual_Surveys/MWMHLE Followup 1Week/MWMHLE Followup 1Week.csv", fileEncoding = "latin1")
+
+```
+
+Administered to all participants who completed a baseline assessment (open or systematic), this followup assessment was sent to participants 1-week after they completed the baseline via email. This collected details about the participants emotion regulation, relationships, self-compassion, resilience, life events/ trauma experiences, and borderline personality disorder symptoms. 
+
+**Total Variables**: `r nrow(mwmhle_v1_1week %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 295
+<br>**Recruitment Dates**: May 2021 - Aug 2024
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: Online (Alchemer)  
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: DERS-SF, ECR-S, SCS-SF, CD-RISC-10, LEC-5, BPS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 1Week/MWMHLE Followup 1Week.csv",
+  name = "NCMH MWMHLE (v1) Followup (1 Week)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 1Week/MWMHLE Followup 1Week.pdf",
+  name = "NCMH MWMHLE (v1) Followup (1 Week)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mwmhle_v1_1week)
+
+```
+
+### MWMHLE (v1) Followup (1 Month)
+
+```{r, echo = FALSE}
+
+mwmhle_v1_1month <- read.csv("../Individual_Surveys/MWMHLE Followup 1Month/MWMHLE Followup 1Month.csv", fileEncoding = "latin1")
+
+```
+
+Administered only to participants who stated they were pregnant during the baseline assessment (open or systematic), this followup assessment was sent to participants 1-month after their stated pregnancy due date - captured on the baseline assessment - via email. This collected details about the participants childbirth experiences, postpartum bonding, child sleeping behaviours, life events/ trauma experiences, social support, depression and anxiety symptoms, resilience, emotion regulation, and self-compassion. 
+**Total Variables**: `r nrow(mwmhle_v1_1month %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 121
+<br>**Recruitment Dates**: Sep 2021 - Aug 2024
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: Online (Alchemer)  
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: CEQ, PBQ, BISQ, PTGI, CBTS, ITQ, MSPSS, PHQ-9, GAD-7, CD-RISC-10, DERS-SF, SCS-SF
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 1Month/MWMHLE Followup 1Month.csv",
+  name = "NCMH MWMHLE (v1) Followup (1 Month)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 1Month/MWMHLE Followup 1Month.pdf",
+  name = "NCMH MWMHLE (v1) Followup (1 Month)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mwmhle_v1_1month)
+
+```
+
+### MWMHLE (v1) Followup (6 Month)
+
+```{r, echo = FALSE}
+
+mwmhle_v1_6month <- read.csv("../Individual_Surveys/MWMHLE Followup 6Month/MWMHLE Followup 6Month.csv", fileEncoding = "latin1")
+
+```
+
+Administered to all participants who completed a baseline assessment (open or systematic), this followup assessment was sent to participants at different timescales depending on their pregnancy status; those who stated they were currently pregnant at baseline were sent this followup 6-months after the 1-month followup was completed, whereas those who were postpartum at baseline were sent this followup 6-months after the 1-week followup was completed. This followup was administered to participants via email. This collected details about the participants social support, life events/ trauma experiences, experiences during COVID-19, depression and anxiety symptoms, resilience, emotion regulation, postpartum bonding, and self-compassion. 
+
+**Total Variables**: `r nrow(mwmhle_v1_6month %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 233
+<br>**Recruitment Dates**: Jan 2022 - Jan 2025
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: Online (Alchemer)  
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MSPSS, PTGI, ITQ, PHQ-9, GAD-7, CD-RISC-10, DERS-SF, SCS-SF, PBQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 6Month/MWMHLE Followup 6Month.csv",
+  name = "NCMH MWMHLE (v1) Followup (6 Month)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 6Month/MWMHLE Followup 6Month.pdf",
+  name = "NCMH MWMHLE (v1) Followup (6 Month)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mwmhle_v1_6month)
+
+```
+
+### MWMHLE (v1) Followup (12 Month)
+
+```{r, echo = FALSE}
+
+mwmhle_v1_12month <- read.csv("../Individual_Surveys/MWMHLE Followup 12Month/MWMHLE Followup 12Month.csv", fileEncoding = "latin1")
+
+```
+
+Administered to all participants who completed a baseline assessment (open or systematic), this followup assessment was sent to all participants 6-months after the completion of the 6-month followup; this followup should therefore have been completed approximately 12-months after the baseline was completed. This followup was identical to the 6-month followup in content and was administered to participants via email. This collected details about the participants social support, life events/ trauma experiences, experiences during COVID-19, depression and anxiety symptoms, resilience, emotion regulation, postpartum bonding, and self-compassion. 
+
+**Total Variables**: `r nrow(mwmhle_v1_12month %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 25
+<br>**Recruitment Dates**: Jun 2024 - Jun 2025
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: Online (Alchemer)  
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: MSPSS, PTGI, ITQ, PHQ-9, GAD-7, CD-RISC-10, DERS-SF, SCS-SF, PBQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 12Month/MWMHLE Followup 12Month.csv",
+  name = "NCMH MWMHLE (v1) Followup (12 Month)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MWMHLE Followup 12Month/MWMHLE Followup 12Month.pdf",
+  name = "NCMH MWMHLE (v1) Followup (12 Month)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mwmhle_v1_12month)
+
+```
+
+## MWMHLE (v2)
+
+This version of the MWMHLE assessment differed from the first as it is hosted on a different survey platform - REDCap - and has been condensed into a single dataset rather than multiple. The overall structure of the survey is similar to the previous version, however there are less followup assessments in the current version, as well as the content of the study differing slightly; this version being more condensed and user-friendly. 
+
+```{r, echo = FALSE}
+
+mwmhle_v2 <- read.csv("../Individual_Surveys/MWMHLE REDCap/MWMHLE REDCap.csv", fileEncoding = "latin1")
+
+```
+
+Due to the large size of this dataset, as well as there being multiple followups and a baseline condensed into a single dataset, here is a breakdown of the data included. Note, when using the data dictionary below, utilise the variables suffixed **_timestamp** (e.g. mwmhle_basic_assessment_timestamp); these will indicate the start of a new survey, i.e. the baseline and followups. 
+
+BASELINE: Administered to participants through two recruitment streams, either open (e.g. social media, newsletters, NCMH website) or systematic (participants were signposted to the study at NHS healthboards/ sites) methods. Regardless of recruitment method, the content of the baseline assessment was identical. This collected details about the participants demographics, pregnancy status, fertility, attachment, post-labour experiences, experiences during childbirth, life events/ trauma experiences, postpartum bonding, child sleeping behaviours, physical health, psychiatric history, treatments, services accessed, social support, anxiety and depression symptoms, emotion regulation, relationships, and self-compassion. Some included questions differed depending on the participants pregnancy status (i.e. if they were post-partum the participant received additional questions compared to those who were currently pregnant).
+
+1-MONTH FOLLOWUP: Administered only to participants who stated they were pregnant during the baseline assessment, this followup assessment was automatically sent to participants 1-month after their stated pregnancy due date - captured on the baseline assessment - via email. This collected details about the participants childbirth experiences, life events/ trauma experiences, bonding, child sleeping behaviours, services accessed, social support, anxiety and depression symptoms, resilience, and self-compassion.  
+
+6-MONTH FOLLOWUP: Administered to participants 6-months after the completion of the baseline assessment, this followup was automatically sent to participants via email. This collected details about the participants social support, services accessed, life events/ trauma experiences, depression and anxiety symptoms, resilience, emotion regulation, self-compassion, and borderline personality disorder symptoms.
+
+12-MONTH FOLLOWUP: Administered to participants 12-months after the completion of the baseline assessment, this followup was automatically sent to participants via email. This assessment is identical to the 6-month followup and collected details about the participants social support, services accessed, life events/ trauma experiences, depression and anxiety symptoms, resilience, emotion regulation, self-compassion, and borderline personality disorder symptoms.
+
+**Total Variables**: `r nrow(mwmhle_v2 %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 646
+<br>**Recruitment Dates**: Jan 2024 - Present
+<br>**Recruitment Method**: Participant Self-completed 
+<br>**Data Collection Method**: Online (REDCap) 
+<br>**Status**: Open 
+<br>**Principal Investigator**: Dr. Cerith Waters
+<br>**Standardised Scales Included**: MAAS, CEQ, PTGI, PBQ, BISQ, ACE, ITQ, MSPSS, PHQ-9, GAD-7, DERS-SF, ECR-S, SCS-SF, CD-RISC-10, LEC-5, BPS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MWMHLE REDCap/MWMHLE REDCap.csv",
+  name = "NCMH MWMHLE (v2)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MWMHLE REDCap/MWMHLE REDCap.pdf",
+  name = "NCMH MWMHLE (v2)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mwmhle_v2)
+
+```
+
+# STUDENT COHORT ASSESSMENTS
+
+Initially developed in 2018, the NCMH student cohort has been expanding continually up until the present day. Between 2018 and 2020 the student-focussed assessments were developed and administered exclusively by NCMH. 
+
+In 2022, NCMH partnered with the U-Flourish Nurture-U group (https://www.nurtureuniversity.co.uk/), resulting a new assessment being developed which was to be administered in different universities across the UK (inc. Cardiff, Southhampton, Newcastle, Oxford, King's College London, and Exeter Universities) and datasets collated for research purposes. Multiple iterations of these assessments were developed with both baseline and followup assessments changing from year to year.
+
+## Student Health and Wellbeing Study (2019)
+
+```{r, echo = FALSE}
+
+alch_ss_2019 <- read.csv("../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv")
+
+```
+
+This assessment was administered to a large number of participants through open recruitment (e.g. social media, newsletters, NCMH website). This assessment was similar to the **NCMH Brief Assessment** but adapted to a student cohort; it collected details about the participants demographics, student status, psychiatric history, treatments, physical health, mood and wellbeing, depression and anxiety symptoms, and support services accessed.
+
+**Total Variables**: `r nrow(alch_ss_2019 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 1929 
+<br>**Recruitment Dates**: Aug 2018 - Aug 2019 
+<br>**Recruitment Method**: Online (Alchemer) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.csv",
+  name = "NCMH Student Health and Wellbeing Study (2019)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2019/Alchemer Student Survey 2019.pdf",
+  name = "NCMH Student Health and Wellbeing Study (2019)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = alch_ss_2019)
+
+```
+
+## Student Health and Wellbeing Study (2020)
+
+```{r, echo = FALSE}
+
+alch_ss_2020 <- read.csv("../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv")
+
+```
+
+This assessment was administered to a large number of participants through open recruitment (e.g. social media, newsletters, NCMH website). This assessment was similar to the **NCMH Brief Assessment** but adapted to a student cohort; it collected details about the participants demographics, student status, psychiatric history, treatments, physical health, mood and wellbeing, depression and anxiety symptoms, and support services accessed. Unlike the previous version (2019), this assessment included additional questions on psychiatric diagnoses and self-rated quality of life. 
+
+**Total Variables**: `r nrow(alch_ss_2020 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 704 
+<br>**Recruitment Dates**: Sep 2019 - Jan 2020 
+<br>**Recruitment Method**: Online (Alchemer) 
+<br>**Data Collection Method**: Participant Self-completed
+<br>**Status**: Closed 
+<br> **Principal Investigator**: Prof. Ian Jones 
+<br>**Standardised Scales Included**: PHQ-9, GADS-7, WEMWBS-7
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.csv",
+  name = "NCMH Student Health and Wellbeing Study (2020)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Alchemer Student Survey 2020/Alchemer Student Survey 2020.pdf",
+  name = "NCMH Student Health and Wellbeing Study (2020)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = alch_ss_2020)
+
+```
+
+## Nurture-U Baseline (2022-23)
+
+```{r, echo = FALSE}
+
+nurtureu_base_22 <- read.csv("../Individual_Surveys/Nurture U Baseline 2022/Nurture U Baseline 2022.csv")
+
+```
+
+This was the first baseline assessment developed by the Nurture-U group; distributed in the winter of 2022 to participants through open recruitment (e.g. newsletters, presented in lectures, posters, events). This assessment collected details about the participants demographics, student status, psychiatric history, life events/ trauma experiences, suicide ideation, mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_base_22 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 512
+<br>**Recruitment Dates**: Oct 2022 - Apr 2023
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: CECA, YPARQ-2, C-SSRS, WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, RULS-8, DERS-18, SCS-SF, RRS-22, READ, BRS, CB-RSS, AUDIT-C, PSS-14, SCI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2022/Nurture U Baseline 2022.csv",
+  name = "NCMH Nurture-U Baseline (2022-23)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2022/Nurture U Baseline 2022.pdf",
+  name = "NCMH Nurture-U Baseline (2022-23)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_base_22)
+
+```
+
+## Nurture-U Followup Spring (2022-23)
+
+```{r, echo = FALSE}
+
+nurtureu_spring_23 <- read.csv("../Individual_Surveys/Nurture U Spring 2023/Nurture U Spring 2023.csv")
+
+```
+
+Followup 1 of 2 for 2022-23; this followup assessment was distributed in the spring of 2023 to participants who completed the **Nurture-U Baseline (2022-23)**. This assessment collected details about the participants mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, psychosis symptoms, suicide ideation, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, access to care, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_spring_23 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 62
+<br>**Recruitment Dates**: May 2023 - June 2023
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, YPARQ-2, C-SSRS, RULS-8, DERS-18, SCS-SF, RSS-22, READ, BRS, CB-RSS, CSSWQ, AUDIT-C, PSS-14, PSSI, SCI, BCC, BACE, BSWS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Spring 2023/Nurture U Spring 2023.csv",
+  name = "NCMH Nurture-U Followup Spring (2022-23)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Spring 2023/Nurture U Spring 2023.pdf",
+  name = "NCMH Nurture-U Followup Spring (2022-23)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_spring_23)
+
+```
+
+## Nurture-U Followup Autumn (2022-23)
+
+```{r, echo = FALSE}
+
+nurtureu_autumn_23 <- read.csv("../Individual_Surveys/Nurture U Autumn 2023/Nurture U Autumn 2023.csv")
+
+```
+
+Followup 2 of 2 for 2022-23; this followup assessment was distributed in the autumn/ winter of 2023 to participants who completed the **Nurture-U Baseline (2022-23)**. This assessment collected details identical to the spring followup (2022-23) including the participants mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, psychosis symptoms, suicide ideation, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, access to care, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_autumn_23 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 54
+<br>**Recruitment Dates**: Dec 2023 - Jan 2024
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, YPARQ-2, C-SSRS, RULS-8, DERS-18, SCS-SF, RSS-22, READ, BRS, CB-RSS, CSSWQ, AUDIT-C, PSS-14, PSSI, SCI, BCC, BACE, BSWS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Autumn 2023/Nurture U Autumn 2023.csv",
+  name = "NCMH Nurture-U Followup Autumn (2022-23)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Autumn 2023/Nurture U Autumn 2023.pdf",
+  name = "NCMH Nurture-U Followup Autumn (2022-23)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_autumn_23)
+
+```
+
+## Nurture-U Baseline (2023-24)
+
+```{r, echo = FALSE}
+
+nurtureu_base_23 <- read.csv("../Individual_Surveys/Nurture U Baseline 2023/Nurture U Baseline 2023.csv")
+
+```
+
+This was the second baseline assessment developed by the Nurture-U group; distributed in the winter of 2023 to participants through open recruitment (e.g. newsletters, presented in lectures, posters, events) as well as existing participants who took part in the **Nurture-U Baseline (2022-23)**. This assessment collected details about the participants demographics, student status, psychiatric history, life events/ trauma experiences, suicide ideation, mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_base_23 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 627
+<br>**Recruitment Dates**: Oct 2023 - Dec 2023
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: CECA, YPARQ-2, C-SSRS, WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, RULS-8, DERS-18, SCS-SF, RRS-22, READ, BRS, CB-RSS, AUDIT-C, PSS-14, SCI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2023/Nurture U Baseline 2023.csv",
+  name = "NCMH Nurture-U Baseline (2023-24)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2023/Nurture U Baseline 2023.pdf",
+  name = "NCMH Nurture-U Baseline (2023-24)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_base_23)
+
+```
+
+## Nurture-U Followup Spring (2023-24)
+
+```{r, echo = FALSE}
+
+nurtureu_spring_24 <- read.csv("../Individual_Surveys/Nurture U Spring 2024/Nurture U Spring 2024.csv")
+
+```
+
+Followup 1 of 2 for 2023-24; this followup assessment was distributed in the spring of 2024 to participants who completed the **Nurture-U Baseline (2023-24)**. This assessment collected details about the participants mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, psychosis symptoms, suicide ideation, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, access to care, financial stress, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_spring_24 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 89
+<br>**Recruitment Dates**: Mar 2024 - Jun 2024
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: YPARQ-2, C-SSRS, WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, RULS-8, DERS-18, SCS-SF, RRS-22, READ, BRS, CB-RSS, CSSWQ, AUDIT-C, PSS-14, PSSI, SCI, BCC, BACE, BSWS, SMS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Spring 2024/Nurture U Spring 2024.csv",
+  name = "NCMH Nurture-U Followup Spring (2023-24)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Spring 2024/Nurture U Spring 2024.pdf",
+  name = "NCMH Nurture-U Followup Spring (2023-24)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_spring_24)
+
+```
+
+## Nurture-U Followup Autumn (2023-24)
+
+```{r, echo = FALSE}
+
+nurtureu_autumn_24 <- read.csv("../Individual_Surveys/Nurture U Autumn 2024/Nurture U Autumn 2024.csv")
+
+```
+
+Followup 2 of 2 for 2023-24; this followup assessment was distributed in the autumn/ winter of 2024 to participants who completed the **Nurture-U Baseline (2023-24)**. This assessment collected details on the participants mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, psychosis symptoms, suicide ideation, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, access to care, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_autumn_24 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 60
+<br>**Recruitment Dates**: Dec 2024 - Jan 2025
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, YPARQ-2, C-SSRS, RULS-8, DERS-18, SCS-SF, RSS-22, READ, BRS, CB-RSS, CSSWQ, AUDIT-C, PSS-14, PSSI, SCI, BCC, BACE, BSWS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Autumn 2024/Nurture U Autumn 2024.csv",
+  name = "NCMH Nurture-U Followup Autumn (2023-24)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Autumn 2024/Nurture U Autumn 2024.pdf",
+  name = "NCMH Nurture-U Followup Autumn (2023-24)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_autumn_24)
+
+```
+
+## Nurture-U Baseline (2024-25)
+
+```{r, echo = FALSE}
+
+nurtureu_base_24 <- read.csv("../Individual_Surveys/Nurture U Baseline 2024/Nurture U Baseline 2024.csv")
+
+```
+
+This was the third baseline assessment developed by the Nurture-U group; distributed in the winter of 2024 to participants through open recruitment (e.g. newsletters, presented in lectures, posters, events) as well as existing participants who took part in the **Nurture-U Baseline (2022-23)** or **Nurture-U Baseline (2023-24)**. This assessment collected details about the participants demographics, student status, psychiatric history, life events/ trauma experiences, suicide ideation, mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_base_24 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 358
+<br>**Recruitment Dates**: Sep 2024 - Dec 2024
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: CECA, YPARQ-2, C-SSRS, WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, RULS-8, DERS-18, SCS-SF, RRS-22, READ, BRS, CB-RSS, AUDIT-C, PSS-14, SCI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2024/Nurture U Baseline 2024.csv",
+  name = "NCMH Nurture-U Baseline (2024-25)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2024/Nurture U Baseline 2024.pdf",
+  name = "NCMH Nurture-U Baseline (2024-25)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_base_24)
+
+```
+
+## Nurture-U Followup Spring (2024-25)
+
+```{r, echo = FALSE}
+
+nurtureu_spring_25 <- read.csv("../Individual_Surveys/Nurture U Spring 2025/Nurture U Spring 2025.csv")
+
+```
+
+Followup 2 of 2 for 2024-25; this followup assessment was distributed in the spring of 2025 to participants who completed the **Nurture-U Baseline (2024-25)**. This assessment collected details about the participants mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, psychosis symptoms, suicide ideation, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, access to care, financial stress, and sleep quality. 
+
+**Total Variables**: `r nrow(nurtureu_spring_25 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 84
+<br>**Recruitment Dates**: Mar 2025 - Apr 2025
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: YPARQ-2, C-SSRS, WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, RULS-8, DERS-18, SCS-SF, RRS-22, READ, BRS, CB-RSS, CSSWQ, AUDIT-C, PSS-14, PSSI, SCI, BCC, BACE, BSWS, SMS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Spring 2025/Nurture U Spring 2025.csv",
+  name = "NCMH Nurture-U Followup Spring (2024-25)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Spring 2025/Nurture U Spring 2025.pdf",
+  name = "NCMH Nurture-U Followup Spring (2024-25)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = nurtureu_spring_25)
+
+```
+
+## Student Health and Wellbeing Study (2025)
+
+```{r, echo = FALSE}
+
+ss_base_25 <- read.csv("../Individual_Surveys/Nurture U Baseline 2025/Nurture U Baseline 2025.csv")
+
+```
+
+Following the spring followup 2024-25, NCMH and the U-Flourish Nurture-U group ceased to collaborate together due to funding constraints from the  U-Flourish Nurture-U group. Despite this, NCMH continued to administer the Student Health and Wellbeing Study to participants through open recruitment (e.g. newsletters, presented in lectures, posters, events). This assessment contained identical content to the **Nurture-U Baseline (2024-25)**, collecting details about the participants demographics, student status, psychiatric history, life events/ trauma experiences, suicide ideation, mood and wellbeing, anxiety and depression symptoms, eating disorder symptoms, loneliness, emotion regulation, self-compassion, resilience, stress, substance use, and sleep quality. 
+
+**Total Variables**: `r nrow(ss_base_25 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 161
+<br>**Recruitment Dates**: Sep 2025 - Nov 2025
+<br>**Recruitment Method**: Online (REDCap) 
+<br>**Data Collection Method**: Participant Self-completed 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Liz Forty
+<br>**Standardised Scales Included**: CECA, YPARQ-2, C-SSRS, WEMWBS-7, GADS-7, PHQ-9, SCID-5, SCOFF, RULS-8, DERS-18, SCS-SF, RRS-22, READ, BRS, CB-RSS, AUDIT-C, PSS-14, SCI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2025/Nurture U Baseline 2025.csv",
+  name = "NCMH Student Health and Wellbeing Study (2025)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Nurture U Baseline 2025/Nurture U Baseline 2025.pdf",
+  name = "NCMH Student Health and Wellbeing Study (2025-26)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ss_base_25)
+
+```
+
+# TRAUMA ASSESSMENTS
+
+Since 2016, NCMH has been conducting research into individuals experiencing various forms of trauma, including Post-Traumatic Stress Disorder (PTSD), Complex Post-Traumatic Stress Disorder (CPTSD), childhood trauma, and other major life events. Various different assessments have been developed and administered over time, each of which focussing on different traumatic experiences, with both researcher-led and participant self-completed assessments being administered. 
+
+## PTSD Registry Interview (v5a)
+
+```{r, echo = FALSE}
+
+ptsd_int_v5a <- read.csv("../Individual_Surveys/PTSD v5a Registry Interview/PTSD v5a Registry Interview.csv")
+
+```
+
+Administered to a small number of participants, this researcher-led structured clinical assessment aimed to collect detailed information about a participants traumatic experiences and identify if their symptoms were concordant with a diagnosis of PTSD/ CPTSD. This assessment collected details about the participants demographics, emotional state, health and wellbeing, life events/ trauma experiences, trauma symptoms, PTSD and CPTSD diagnoses, and borderline personality disorder diagnosis. 
+
+**Total Variables**: `r nrow(ptsd_int_v5a %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 76
+<br>**Recruitment Dates**: Sep 2017 - Sep 2019
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Researcher Administered
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: LEC-5, CAPS-5
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PTSD v5a Registry Interview/PTSD v5a Registry Interview.csv",
+  name = "NCMH PTSD Registry Interview (v5a)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PTSD v5a Registry Interview/PTSD v5a Registry Interview.pdf",
+  name = "NCMH PTSD Registry Interview (v5a)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ptsd_int_v5a)
+
+```
+
+## PTSD Questionnaire (v5a)
+
+```{r, echo = FALSE}
+
+ptsd_aq_v5a <- read.csv("../Individual_Surveys/PTSD v5a Registry Self Complete Questionnaire/PTSD v5a Registry Self Complete Questionnaire.csv")
+
+```
+
+Following the completion of the **PTSD Registry Interview (v5a)** participants were requested to complete a questionnaire in their own time and return it NCMH via post or during their next interview (if applicable). This questionnaire was self-completed by the participant and included a large quantity of standardised validated measures. This assessment collected details about the participants cognitive functioning, interpersonal problems, life events/ trauma experiences, personality disorder symptoms, childhood experiences, social support, relationships, resilience, emotion regulation, depression and anxiety symptoms, medication, substance use, sleep quality, and quality of life. 
+
+**Total Variables**: `r nrow(ptsd_aq_v5a %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 65
+<br>**Recruitment Dates**: Sep 2017 - Feb 2020
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Participant Self-completed
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: PTCI, IIP-32, PCL-5, ITQ, SCID-5-BPD, ACE, DTS, MSPSS, ECR-S, CD-RISC-10, ERQ, PHQ-15, PHQ-9, PHQ-PD, PHQ, MARS, AUDIT, PSQI, EQ-5D-3L
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PTSD v5a Registry Self Complete Questionnaire/PTSD v5a Registry Self Complete Questionnaire.csv",
+  name = "NCMH PTSD Questionnaire (v5a)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PTSD v5a Registry Self Complete Questionnaire/PTSD v5a Registry Self Complete Questionnaire.pdf",
+  name = "NCMH PTSD Questionnaire (v5a)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ptsd_aq_v5a)
+
+```
+
+## PTSD Questionnaire (v7)
+
+```{r, echo = FALSE}
+
+ptsd_aq_v7 <- read.csv("../Individual_Surveys/PTSD v7 Registry Self Complete Questionnaire/PTSD v7 Registry Self Complete Questionnaire.csv")
+
+```
+
+Completed alongside the **PTSD Questionnaire (v5a)**, participants were requested to complete this questionnaire also in their own time and return it NCMH via post or during their next interview (if applicable). This questionnaire was self-completed by the participant and included a modified version of the PCL-5 and ITQ; collecting details about the participants life events/ trauma experiences.
+
+**Total Variables**: `r nrow(ptsd_aq_v7 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 40
+<br>**Recruitment Dates**: Sep 2017 - Nov 2019
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Participant Self-completed
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: PCL-5, ITQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PTSD v7 Registry Self Complete Questionnaire/PTSD v7 Registry Self Complete Questionnaire.csv",
+  name = "NCMH PTSD Questionnaire (v7)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PTSD v7 Registry Self Complete Questionnaire/PTSD v7 Registry Self Complete Questionnaire.pdf",
+  name = "NCMH PTSD Questionnaire (v7)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ptsd_aq_v7)
+
+```
+
+## PTSD Registry Interview (v11)
+
+```{r, echo = FALSE}
+
+ptsd_int_v11 <- read.csv("../Individual_Surveys/PTSD v11 Registry Interview/PTSD v11 Registry Interview.csv")
+
+```
+
+Similar to the **PTSD Registry Interview (v5a)**, this version of the researcher-led structured clinical assessment also aimed to collect detailed information about a participants traumatic experiences and identify if their symptoms were concordant with a diagnosis of PTSD/ CPTSD. This version, however, is more condensed and collected less information than the original. As such, this assessment collected details about the participants life events/ trauma experiences, trauma/ PTSD/ CPTSD symptoms, and borderline personality disorder symptoms. 
+
+**Total Variables**: `r nrow(ptsd_int_v11 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 10
+<br>**Recruitment Dates**: Nov 2019 - Mar 2020
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Researcher Administered
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: LEC-5, CAPS-5, ITI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PTSD v11 Registry Interview/PTSD v11 Registry Interview.csv",
+  name = "NCMH PTSD Registry Interview (v11)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PTSD v11 Registry Interview/PTSD v11 Registry Interview.pdf",
+  name = "NCMH PTSD Registry Interview (v11)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ptsd_int_v11)
+
+```
+
+## PTSD Questionnaire (v11)
+
+```{r, echo = FALSE}
+
+ptsd_aq_v11 <- read.csv("../Individual_Surveys/PTSD v11 Registry Self Complete Questionnaire/PTSD v11 Registry Self Complete Questionnaire.csv")
+
+```
+
+Following the completion of the **PTSD Registry Interview (v11)** participants were requested to complete a questionnaire in their own time and return it NCMH via post or during their next interview (if applicable). This questionnaire was self-completed by the participant and included a large quantity of standardised validated measures. This assessment was similar in content to the **PTSD Questionnaire (v5a)**, with some questions being removed and others added, thereby collecting details about the participants, interpersonal problems, life events/ trauma experiences, personality disorder symptoms, childhood experiences, self-esteem, relationships, emotion regulation, depression and anxiety symptoms, sleep quality, and quality of life. 
+
+**Total Variables**: `r nrow(ptsd_aq_v11 %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 9
+<br>**Recruitment Dates**: Sep 2019 - Mar 2020
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Participant Self-completed
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: ACE, LEC-5, ITQ, PTCI, PHQ-15, PHQ-9, PHQ-PD, WHO-5, DSS, RSES, DERS, ECR-S, IIP, ISI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PTSD v11 Registry Self Complete Questionnaire/PTSD v11 Registry Self Complete Questionnaire.csv",
+  name = "NCMH PTSD Questionnaire (v11)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PTSD v11 Registry Self Complete Questionnaire/PTSD v11 Registry Self Complete Questionnaire.pdf",
+  name = "NCMH PTSD Questionnaire (v11)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ptsd_aq_v11)
+
+```
+
+## PTSD DSMV ICD11 Summary
+
+```{r, echo = FALSE}
+
+ptsd_dsmicd <- read.csv("../Individual_Surveys/PTSD Phase2 DSMV ICD11 Summary/PTSD Phase2 DSMV ICD11 Summary.csv")
+
+```
+
+Following the completion of a registry interview (**PTSD Registry Interview (v5a)** or **PTSD Registry Interview (v11)**), the researcher would utilise this summary questionnaire to document whether the participant met the threshold for a diagnosis Post-Traumatic Stress Disorder, Complex Post-Traumatic Stress Disorder, and/ or Borderline Personality Disorder, using the Diagnostic and Statistical Manual of Mental Disorders 5th Edition (DSM-V) and International Classification of Diseases 11th Revision (ICD-11) diagnostic criteria. 
+
+**Total Variables**: `r nrow(ptsd_dsmicd %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 73
+<br>**Recruitment Dates**: Information Unavailable
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Researcher Administered
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PTSD Phase2 DSMV ICD11 Summary/PTSD Phase2 DSMV ICD11 Summary.csv",
+  name = "NCMH PTSD DSMV ICD11 Summary",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PTSD Phase2 DSMV ICD11 Summary/PTSD Phase2 DSMV ICD11 Summary.pdf",
+  name = "NCMH PTSD DSMV ICD11 Summary",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ptsd_dsmicd)
+
+```
+
+## PTSD ITI Summary
+
+```{r, echo = FALSE}
+
+ptsd_iti <- read.csv("../Individual_Surveys/PTSD ITI Summary/PTSD ITI Summary.csv")
+
+```
+
+Following the completion of a registry interview (**PTSD Registry Interview (v5a)** or **PTSD Registry Interview (v11)**), the researcher would utilise this summary questionnaire to document whether the participant met the threshold for a diagnosis Post-Traumatic Stress Disorder and/ or Complex Post-Traumatic Stress Disorder, using the International Trauma Interview (ITI) diagnostic criteria. 
+
+**Total Variables**: `r nrow(ptsd_iti %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 8
+<br>**Recruitment Dates**: Information Unavailable
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Researcher Administered
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: ITI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PTSD ITI Summary/PTSD ITI Summary.csv",
+  name = "NCMH PTSD ITI Summary",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PTSD ITI Summary/PTSD ITI Summary.pdf",
+  name = "NCMH PTSD ITI Summary",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = ptsd_iti)
+
+```
+
+## Traumatic Experiences Questionnaire
+
+```{r, echo = FALSE}
+
+teq <- read.csv("../Individual_Surveys/Traumatic Experiences Questionnaire/Traumatic Experiences Questionnaire.csv")
+
+```
+
+In 2020, NCMH transitioned to data collection through online platforms (e.g. Alchemer), as a result the existing PTSD Questionnaires were transformed into new versions. Similar to the **PTSD Questionnaire (v11)** in content, this assessment captured much of the same information just using online data collection as opposed to paper-based assessments. This assessment collected details about the participants demographics, cognitive functioning, interpersonal problems, life events/ trauma experiences, personality disorder symptoms, childhood experiences, social support, relationships, resilience, emotion regulation, depression and anxiety symptoms, medication, substance use, sleep quality, and quality of life. 
+
+**Total Variables**: `r nrow(teq %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 165
+<br>**Recruitment Dates**: Nov 2020 - Aug 2023
+<br>**Recruitment Method**: Online (Alchemer)
+<br>**Data Collection Method**: Participant Self-completed
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: ACE, LEC-5, ITQ, PTCI, PHQ-15, PHQ-9, PHQ-PD, WHO-5, DSS, RSES, DERS, ECR-S, IIP-32, ISI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Traumatic Experiences Questionnaire/Traumatic Experiences Questionnaire.csv",
+  name = "NCMH Traumatic Experiences Questionnaire",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Traumatic Experiences Questionnaire/Traumatic Experiences Questionnaire.pdf",
+  name = "NCMH Traumatic Experiences Questionnaire",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = teq)
+
+```
+
+## International Trauma Interview
+
+```{r, echo = FALSE}
+
+iti <- read.csv("../Individual_Surveys/International Trauma Interview/International Trauma Interview.csv")
+
+```
+
+In 2020, NCMH transitioned to data collection through online platforms (e.g. Alchemer), as a result the existing trauma questionnaires were transformed into new versions. Similar to the **PTSD ITI Summary** in content, this assessment captured much of the same information just using online data collection as opposed to paper-based assessments. Following an interview with the participant (data not recorded) the researcher would utilise this questionnaire to document whether the participant met the threshold for a diagnosis Post-Traumatic Stress Disorder and/ or Complex Post-Traumatic Stress Disorder, using the International Trauma Interview (ITI) diagnostic criteria. 
+
+**Total Variables**: `r nrow(iti %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 145
+<br>**Recruitment Dates**: Nov 2020 - Sep 2023
+<br>**Recruitment Method**: Online (Alchemer)
+<br>**Data Collection Method**: Researcher Administered
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: ITI, CAPS-5
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/International Trauma Interview/International Trauma Interview.csv",
+  name = "NCMH International Trauma Interview",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/International Trauma Interview/International Trauma Interview.pdf",
+  name = "NCMH International Trauma Interview",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = iti)
+
+```
+
+## Trauma Survey
+
+```{r, echo = FALSE}
+
+trauma_survey <- read.csv("../Individual_Surveys/Trauma Survey/Trauma Survey.csv")
+
+```
+
+Developed in 2023, the latest version of the trauma-focussed assessments was developed using much of the questions/ variables from earlier iterations. Utilising both open (e.g. social media, newsletters, NCMH website) and systematic (signposted to the study at NHS healthboards/ sites) recruitment methods, this study aims to recruit individuals who have experienced trauma in their lifetimes. This assessment collects details about the participants demographics, life events/ trauma experiences, depression and anxiety symptoms, psychiatric history, wellbeing, work and social adjustment, and gambling experiences.
+
+**Total Variables**: `r nrow(trauma_survey %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 1197
+<br>**Recruitment Dates**: Jun 2023 - Present
+<br>**Recruitment Method**: Online (REDCap)
+<br>**Data Collection Method**: Participant Self-completed
+<br>**Status**: Open 
+<br>**Principal Investigator**: Prof. Jonathan Bisson
+<br>**Standardised Scales Included**: ACE, LEC-5, ITQ, PHQ-9, GAD-7, PDSS, WHO-5, WSAS, BPGS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/Trauma Survey/Trauma Survey.csv",
+  name = "NCMH Trauma Survey",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/Trauma Survey/Trauma Survey.pdf",
+  name = "NCMH Trauma Survey",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = trauma_survey)
+
+```
+
+# AUTISM SPECTRUM DISORDER (ASD) ASSESSMENTS
+
+To date, only a single assessment has been developed focussing specifically on individuals with Autism Spectrum Disorder (ASD). Whilst data on ASD symptoms and diagnoses has been collected in other assessments, the assessment below focussed solely on ASD. 
+
+## Psychiatric Comorbidity in ASD
+
+```{r, echo = FALSE}
+
+comorbid_asd <- read.csv("../Individual_Surveys/N21 Psychiatric Comorbidity in ASD/N21 Psychiatric Comorbidity in ASD.csv", fileEncoding = "latin1")
+
+```
+
+Developed sometime between 2017-2020, this ASD-focussed assessment was developed using the Autism Spectrum Quotient 50-Item (AQ-50), a standardised scale used to identify autistic traits in adults. This assessment was specifically developed for a research project led by Dr Jack Underwood, and recruited participants from the NCMH cohort who had existing self-reported diagnoses of ASD or Autism. This assessment collected details about the participants ASD traits as well as social responsiveness, experiences of migraines, and anxiety and depression symptoms. 
+
+**Total Variables**: `r nrow(comorbid_asd %>% group_by(new_variable_name) %>% slice(1))` 
+<br>**Total Participants**: 123
+<br>**Recruitment Dates**: Information Unavailable
+<br>**Recruitment Method**: FORMIC
+<br>**Data Collection Method**: Participant Self-completed
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Dr. Jack Underwood
+<br>**Standardised Scales Included**: AQ, SRS-2, ID Migraine, HADS
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/N21 Psychiatric Comorbidity in ASD/N21 Psychiatric Comorbidity in ASD.csv",
+  name = "NCMH Psychiatric Comorbidity in ASD",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/N21 Psychiatric Comorbidity in ASD/N21 Psychiatric Comorbidity in ASD.pdf",
+  name = "NCMH Psychiatric Comorbidity in ASD",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = comorbid_asd)
+
+```
+
+# WOMEN'S MENTAL HEALTH ASSESSMENTS
+
+Alongside other assessments within NCMH focussing primarily on women's mental health, the following are centred around reproductive mental health and experiences during the perinatal period. Each assessment focusses on different areas of reproductive mental health, for example Premenstrual Dysphoric Disorder (PMDD), Postpartum Psychosis (PP), or mental health more generally in the context of childbirth.  
+## Mother and Baby Unit (MBU) Assessment
+
+Developed in 2022, this assessment was developed utilising many of the questions/ scales used in previous NCMH assessments. Recruiting exclusively through systematic methods, researchers from NHS sites containing mother and baby units would administer this assessment to mothers after being admitted. This assessment collected details about the participants demographics, psychiatric history, pregnancy, children, family psychiatric history, physical health, substance use, work and social adjustment, depression and anxiety symptoms, life events/ trauma experiences, medication use, sleep quality, and wellbeing. 
+
+```{r, echo = FALSE}
+
+mbu <- read.csv("../Individual_Surveys/MBU/MBU.csv", fileEncoding = "latin1")
+
+```
+
+**Total Variables**: `r nrow(mbu %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 64
+<br>**Recruitment Dates**: Mar 2022 - Mar 2025
+<br>**Recruitment Method**: Researcher Administered
+<br>**Data Collection Method**: Online (REDCap) 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: WSAS, GAD-7, PHQ-9, WHODAS, AUDIT, HADS, AMS, ACE, MARS, ITQ, LEC-5, SF-12, CAPE, PSQI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/MBU/MBU.csv",
+  name = "NCMH Mother and Baby Unit (MBU)",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/MBU/MBU.pdf",
+  name = "NCMH Mother and Baby Unit (MBU)",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = mbu)
+
+```
+
+## Premenstrual Dysphoric Disorder - Indicators, Causes & Triggers (PreDDICT) Assessment
+
+Developed in 2022, this assessment was developed specifically for individuals experiencing Premenstrual Dysphoric Disorder (PMDD) or severe Premenstrual Syndrome (PMS). Self-completed by participants through open recruitment (e.g. social media, newsletters), this assessment is administered over an extended period of time with participants completing an initial baseline assessment, followed by 80-days of mood diaries, and a further followup assessment upon completion. This study also collected biological (saliva) samples for a subset of eligible participants. This assessment collected details about the participants demographics, psychiatric history, PMDD/ PMS experiences, medication, menstrual cycle, pregnancy, treatments, physical health, and longitudinal mood monitoring. 
+
+```{r, echo = FALSE}
+
+preddict <- read.csv("../Individual_Surveys/PreDDICT/PreDDICT.csv", fileEncoding = "latin1")
+
+```
+
+**Total Variables**: `r nrow(preddict %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 1071
+<br>**Recruitment Dates**: Nov 2022 - Present
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Online (REDCap) 
+<br>**Status**: Open 
+<br>**Principal Investigator**: Prof. Arianna Di Florio
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/PreDDICT/PreDDICT.csv",
+  name = "NCMH PreDDICT",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/PreDDICT/PreDDICT.pdf",
+  name = "NCMH PreDDICT",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = preddict)
+
+```
+
+## Genetic Architecture Of Sex Steroid-related Psychiatric Disorders (GASSP) Assessment
+
+Developed in 2023 following grant funding from the European Research Council (ERC), the Genetic Architecture Of Sex Steroid-related Psychiatric Disorders (GASSP) project is the first molecular genetic study of the psychiatric sensitivity to sex hormone changes. Pseudonymed as the Mums and Mental Health (MAM) study, GASSP aimed to recruit participants with psychiatric disorders (e.g. Postpartum Psychosis) which are temporally related to changes in sex hormones. This study also collected biological (saliva) samples for a subset of eligible participants. This assessment collected details about the participants demographics, psychiatric history, episodes of serious mental illness, treatments, pregnancy, and menstrual health. 
+
+```{r, echo = FALSE}
+
+gassp <- read.csv("../Individual_Surveys/GASSP/GASSP.csv", fileEncoding = "latin1")
+
+```
+
+**Total Variables**: `r nrow(gassp %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 216
+<br>**Recruitment Dates**: Jul 2023 - Present
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Online (REDCap) 
+<br>**Status**: Open 
+<br>**Principal Investigator**: Prof. Arianna Di Florio
+<br>**Standardised Scales Included**: None
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/GASSP/GASSP.csv",
+  name = "NCMH GASSP",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/GASSP/GASSP.pdf",
+  name = "NCMH GASSP",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = gassp)
+
+```
+
+# EARLY INTERVENTION SERVICE (EIS) ASSESSMENTS
+
+Focussing primarily on individuals from Early Intervention Services (EIS) within the NHS, these assessments were developed to assess individuals with a psychosis (or related) diagnosis. 
+
+## Early Intervention Services (EIS) Assessment
+
+Developed in 2022, this assessment was developed utilising many of the questions/ scales used in previous NCMH assessments. Recruiting exclusively through systematic methods, researchers from NHS sites containing early intervention services would administer this assessment to individuals with psychosis (or related diagnoses) following admission. This assessment was split into two sections, the first (basic/ baseline assessment) being administered by a researcher in the EIS, followed by a followup (adult questionnaire) being sent to participants by email following the completion of the baseline assessment. The followup assessment was completed in the participants own time, typically at home. These assessments collected details about the participants demographics, psychiatric history, illness onset, family psychiatric history, medication and treatments, substance use, life events/ trauma experiences, mania symptoms, psychosis symptoms, and sleep quality. 
+
+```{r, echo = FALSE}
+
+eis <- read.csv("../Individual_Surveys/EIS/EIS.csv", fileEncoding = "latin1")
+
+```
+
+**Total Variables**: `r nrow(eis %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 238
+<br>**Recruitment Dates**: Mar 2022 - Mar 2025
+<br>**Recruitment Method**: Researcher Administered and Participant Self-completed
+<br>**Data Collection Method**: Online (REDCap) 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: BLEQ, PAS, HADS, AMS, ACE, MARS, ITQ, LEC-5, SF-12, CAPE, PSQI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/EIS/EIS.csv",
+  name = "NCMH Early Intervention Services (EIS) Assessment",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/EIS/EIS.pdf",
+  name = "NCMH Early Intervention Services (EIS) Assessment",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = eis)
+
+```
+
+## Early Intervention Services (EIS) Objective Ratings Form (ORF)
+
+Developed in 2022, this assessment was used alongside the EIS basic assessment/ adult questionnaire. The Objective Ratings Form (ORF) was used by researchers to validate participant responses to questions relating to symptomatology. This assessment was not completed for all participants, only those where a discrepancy was identified between the participants self-reported responses to questions, and the researchers observations whilst the participant was admitted to the early intervention service. This assessment collected details about the participants psychiatric history, medication and treatments, substance use, and clinical measures of psychosis symptomatology. 
+
+```{r, echo = FALSE}
+
+eisorf <- read.csv("../Individual_Surveys/EIS Objective Ratings Form/EIS Objective Ratings Form.csv", fileEncoding = "latin1")
+
+```
+
+**Total Variables**: `r nrow(eisorf %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 197
+<br>**Recruitment Dates**: Mar 2022 - Mar 2025
+<br>**Recruitment Method**: Researcher Administered
+<br>**Data Collection Method**: Online (REDCap) 
+<br>**Status**: Closed 
+<br>**Principal Investigator**: Prof. Ian Jones
+<br>**Standardised Scales Included**: SAPS, SANS, SOFAS, CGI
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/EIS Objective Ratings Form/EIS Objective Ratings Form.csv",
+  name = "NCMH Early Intervention Services (EIS) ORF",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/EIS Objective Ratings Form/EIS Objective Ratings Form.pdf",
+  name = "NCMH Early Intervention Services (EIS) ORF",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = eisorf)
+
+```
 
