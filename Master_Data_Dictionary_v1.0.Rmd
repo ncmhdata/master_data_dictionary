@@ -3323,9 +3323,9 @@ create_tab(data = covid_fu3)
 
 ```
 
-# AUTISM SPECTRUM DISORDER (ASD) ASSESSMENTS
+# NEURODEVELOPMENTAL ASSESSMENTS
 
-To date, only a single assessment has been developed focussing specifically on individuals with Autism Spectrum Disorder (ASD). Whilst data on ASD symptoms and diagnoses has been collected in other assessments, the assessment below focussed solely on ASD. 
+NCMH has historically undertaken sub-projects focussing on neurodevelopmental conditions such as Autism Spectrum Disorder (ASD) and Attention Deficit Hyperactivity Disorder (ADHD). These projects have all been undertaken by co-Principal Investigators affiliated with NCMH.
 
 ## Psychiatric Comorbidity in ASD
 
@@ -3335,7 +3335,7 @@ comorbid_asd <- read.csv("../Individual_Surveys/Psychiatric Comorbidity in ASD/P
 
 ```
 
-Developed sometime between 2017-2020, this ASD-focussed assessment was developed using the **Autism Spectrum Quotient 50-Item (AQ-50)**, a standardised scale used to identify autistic traits in adults. This assessment was specifically developed for a research project led by Dr Jack Underwood, and recruited participants from the NCMH cohort who had existing self-reported diagnoses of ASD or Autism. This assessment collected details about the participants ASD traits as well as social responsiveness, experiences of migraines, and anxiety and depression symptoms. 
+Developed sometime between 2017-2020, this Autism Spectrum Disorder (ASD)-focussed assessment was developed using the **Autism Spectrum Quotient 50-Item (AQ-50)**, a standardised scale used to identify autistic traits in adults. This assessment was specifically developed for a research project led by Dr Jack Underwood, and recruited participants from the NCMH cohort who had existing self-reported diagnoses of ASD or Autism. This assessment collected details about the participants ASD traits as well as social responsiveness, experiences of migraines, and anxiety and depression symptoms. 
 
 **Total Variables**: `r nrow(comorbid_asd %>% group_by(new_variable_name) %>% slice(1))` 
 <br>**Total Participants**: 123
@@ -3364,5 +3364,45 @@ pdf_button(
 
 # TABLE
 create_tab(data = comorbid_asd)
+
+```
+
+## ADHD Survey
+
+```{r, echo = FALSE}
+
+adhd <- read.csv("../Individual_Surveys/ADHD Survey/ADHD Survey.csv")
+
+```
+
+Developed in 2021, this assessment specifically focussed on adults with a diagnosis of Attention Deficit Hyperactivity Disorder (ADHD). Due to an internal error, this assessment remained active for a number of years after its proposed closure date, resulting in recruitment extending past 2021-2022. This assessment collected details about the participants demographics, psychiatric history, medication use, children, strengths and difficulties, ADHD symptoms in children, and impact of COVID-19.
+
+**Total Variables**: `r nrow(adhd %>% group_by(new_variable_name) %>% slice(1))`
+<br>**Total Participants**: 136 
+<br>**Recruitment Dates**: Mar 2021 - May 2026 
+<br>**Recruitment Method**: Participant Self-completed
+<br>**Data Collection Method**: Online (Alchemer) 
+<br>**Status**: Closed
+<br>**Principal Investigator**: Prof. Anita Thaper
+<br>**Standardised Scales Included**: SDQ
+
+```{r, echo = FALSE}
+
+# CSV FILE
+csv_button(
+  file_path = "../Individual_Surveys/ADHD Survey/ADHD Survey.csv",
+  name = "NCMH ADHD Survey",
+  ext = ".csv"
+)
+
+# PDF FILE
+pdf_button(
+  file_path = "../Individual_Surveys/ADHD Survey/ADHD Survey.pdf",
+  name = "NCMH ADHD Survey",
+  ext = ".pdf"
+)
+
+# TABLE
+create_tab(data = adhd)
 
 ```
